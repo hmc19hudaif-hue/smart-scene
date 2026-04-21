@@ -1,118 +1,106 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المشهد الذكي</title>
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        html,body{height:100%;margin:0}
+        *{box-sizing:border-box}
+        body{font-family:'Cairo',sans-serif; background-[#08081a]; color:white;}
+        .mono{font-family:'Space Mono',monospace}
+        .magazine-wrapper{height:100%;overflow-y:auto;overflow-x:hidden;scroll-behavior:smooth;}
+        .page-section{min-height:100vh; display:flex; align-items:center; justify-content:center; padding: 2rem 0;}
+        .grid-bg{background-image:linear-gradient(rgba(99,102,241,0.08) 1px,transparent 1px),linear-gradient(90deg,rgba(99,102,241,0.08) 1px,transparent 1px);background-size:40px 40px;}
+        .tool-card{background:rgba(15,15,25,0.7);backdrop-filter:blur(20px);border:1px solid rgba(99,102,241,0.15); border-radius: 1.5rem; transition:all 0.4s;}
+        .btn-primary{background:linear-gradient(135deg,#6366f1,#8b5cf6);color:white;padding:10px 24px;border-radius:10px;font-weight:600;display:inline-flex;align-items:center;gap:8px;}
+        .btn-ghost{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:#c7d2fe;padding:8px 18px;border-radius:8px;display:inline-flex;align-items:center;gap:6px;}
+    </style>
+</head>
+<body class="bg-[#08081a]">
+
+<div class="magazine-wrapper">
+    <section class="page-section grid-bg" id="sec-cover">
+        <div class="text-center px-6">
+            <div class="mono text-xs tracking-[0.3em] text-indigo-400 mb-6 uppercase">العدد الأول — 2026</div>
+            <h1 class="text-6xl font-extrabold mb-4 text-white">المشهد الذكي</h1>
+            <p class="text-xl text-indigo-200 mb-10">دليلك التفاعلي لأدوات الذكاء الاصطناعي</p>
+            <button class="btn-primary" onclick="document.getElementById('toolPages').scrollIntoView({behavior:'smooth'})">ابدأ الاستكشاف</button>
+        </div>
+    </section>
+
+    <div id="toolPages"></div>
+</div>
+
 <script>
 const tools = [
   {
     id:"runway",num:"02",name:"Runway Gen-3",tagline:"توليد الفيديو من النص والصور",icon:"video",color:"#6366f1",
     desc:"نموذج ذكاء اصطناعي متطور يولد مقاطع فيديو عالية الجودة. في هذا النموذج، قمنا بتحويل صورة ثابتة لمترو الرياض إلى لقطة سينمائية متحركة.",
-    features:["تحريك الصور بدقة عالية","توليد فيديو من النص","أدوات فرشاة الحركة (Motion Brush)","تحسين الجودة لـ 4K"],
-    advantages:["توفير تكاليف التصوير الجوي","سرعة الإنتاج (دقائق بدل أيام)","إنتاج محتوى حصري وفريد"],
-    
-    // القسم المضاف لعرض الفيديو والصورة (قبل وبعد)
+    features:["تحريك الصور بدقة عالية","توليد فيديو من النص","أدوات فرشاة الحركة","تحسين الجودة لـ 4K"],
+    advantages:["توفير تكاليف التصوير الجوي","سرعة الإنتاج","محتوى حصري"],
     customDemo: `
       <div class="mt-8 grid md:grid-cols-2 gap-6 items-center">
-          <div class="tool-card p-4 text-center rounded-xl bg-white/5 border border-white/10">
-              <p class="text-[10px] mono text-indigo-400 mb-3 uppercase tracking-widest">المدخلات: صورة ثابتة (قبل)</p>
-              <img src="riyadh-metro-photo.jpg" alt="صورة مترو الرياض الأصلية" class="rounded-lg w-full aspect-video object-cover shadow-2xl">
+          <div class="tool-card p-4 text-center">
+              <p class="text-[10px] mono text-indigo-400 mb-3 uppercase">المدخلات: صورة ثابتة</p>
+              <img src="riyadh-metro-photo.jpg" class="rounded-lg w-full aspect-video object-cover">
           </div>
-          <div class="tool-card p-4 text-center rounded-xl bg-indigo-500/10 border border-indigo-500/40">
-              <p class="text-[10px] mono text-indigo-400 mb-3 uppercase tracking-widest">المخرجات: فيديو ذكي (بعد)</p>
-              <div class="rounded-lg overflow-hidden shadow-2xl border border-indigo-500/20">
-                  <video controls class="w-full aspect-video bg-black">
-                      <source src="metro-kafd.mp4" type="video/mp4">
-                      متصفحك لا يدعم تشغيل الفيديو.
-                  </video>
-              </div>
+          <div class="tool-card p-4 text-center border-indigo-500/40">
+              <p class="text-[10px] mono text-indigo-400 mb-3 uppercase">المخرجات: فيديو ذكي</p>
+              <video controls class="w-full aspect-video bg-black rounded-lg">
+                  <source src="metro-kafd.mp4" type="video/mp4">
+              </video>
           </div>
-      </div>
-      <div class="mt-4 p-4 bg-indigo-500/5 rounded-xl border border-indigo-500/20 italic text-xs text-indigo-200/70">
-          <strong>تجربة عملية:</strong> "تم تحويل لقطة فوتوغرافية ثابتة لمركز الملك عبدالله المالي إلى مشهد حي باستخدام Runway Gen-3، مع محاكاة فيزيائية لحركة القطار وانعكاسات الضوء."
-      </div>
-    `,
-    
-    useCase:{title:"إنتاج لقطات جوية حصرية",text:"بدلاً من استئجار طائرة درون وتصوير المترو، قام المحرر باستخدام صورة فوتوغرافية وتحويلها إلى فيديو سينمائي بـ (هندسة الأوامر)، مما حقق وفراً بنسبة 100% في تكاليف الإنتاج الميداني."},
+      </div>`,
+    useCase:{title:"إنتاج لقطات جوية حصرية",text:"تحويل صورة فوتوغرافية لمترو الرياض إلى فيديو سينمائي احترافي."},
     link:"https://runwayml.com",
     videoUrl:"https://www.youtube.com/watch?v=GomY9BHqQ7w"
   },
   {
     id:"elevenlabs",num:"04",name:"ElevenLabs",tagline:"توليف الصوت بالذكاء الاصطناعي",icon:"mic",color:"#a78bfa",
-    desc:"توفر ElevenLabs أكثر الأصوات المُولَّدة بالذكاء الاصطناعي واقعية. من الراوي والدبلجة إلى استنساخ الصوت بجودة بشرية.",
-    features:["تحويل نص لكلام واقعي","استنساخ الصوت","دعم 30+ لغة منها العربية","تحكم دقيق في المشاعر"],
-    
-    // إضافة مشغل الصوت (الذي اضفناه سابقاً)
+    desc:"توفر ElevenLabs أكثر الأصوات المُولَّدة بالذكاء الاصطناعي واقعية.",
+    features:["تحويل نص لكلام","استنساخ الصوت","دعم اللغة العربية"],
+    advantages:["واقعية بشرية","دبلجة فورية","بدون استوديو"],
     customDemo: `
-      <div class="mt-6 p-4 tool-card rounded-xl border-indigo-500/30 bg-indigo-500/5">
-          <p class="text-[10px] mono text-indigo-400 mb-2 uppercase tracking-widest text-center">تجربة صوتية: ElevenLabs</p>
-          <audio controls class="w-full h-8">
-              <source src="voice.mp3" type="audio/mpeg">
-              متصفحك لا يدعم مشغل الصوت.
-          </audio>
-      </div>
-    `,
-    
-    useCase:{title:"عرض توضيحي متعدد اللغات",text:"تنشئ شركة ناشئة فيديو بالإنجليزية ثم تستخدم ElevenLabs لتوليد تعليقات صوتية بالعربية والإسبانية واليابانية. النتيجة: أربع فيديوهات محلية في فترة بعد الظهر بدلاً من أسابيع."},
+      <div class="mt-6 p-4 tool-card bg-indigo-500/5">
+          <p class="text-[10px] mono text-indigo-400 mb-2 uppercase text-center">تجربة صوتية</p>
+          <audio controls class="w-full"><source src="voice.mp3" type="audio/mpeg"></audio>
+      </div>`,
+    useCase:{title:"تعليق صوتي للمجلة",text:"استخدام الذكاء الاصطناعي لإنتاج تعليق صوتي احترافي بالعربية."},
     link:"https://elevenlabs.io",
     videoUrl:"https://www.youtube.com/watch?v=GomY9BHqQ7w"
-  },
-  // ... بقية الأدوات (Descript, Kling, Pictory) تظل كما هي
+  }
 ];
 
-// تعديل دالة رندر الأدوات لتشمل العرض المخصص (Custom Demo)
 function renderTools() {
-  const container = document.getElementById('toolPages');
-  container.innerHTML = tools.map(tool => `
-    <section class="page-section relative px-6 py-20 flex items-center border-t border-white/5" data-page="${tool.id}" id="sec-${tool.id}">
-      <div class="max-w-5xl mx-auto w-full">
-        <div class="fade-in mb-8">
-          <div class="mono text-xs tracking-[0.2em] text-indigo-400 mb-3">${tool.num} / الأداة</div>
-          <div class="flex items-center gap-4 mb-4">
-             <div class="p-3 rounded-2xl" style="background:${tool.color}20"><i data-lucide="${tool.icon}" style="color:${tool.color};width:32px;height:32px"></i></div>
-             <h2 class="text-3xl sm:text-5xl font-bold text-white">${tool.name}</h2>
-          </div>
-          <p class="text-xl text-indigo-300 font-light">${tool.tagline}</p>
-        </div>
-        
-        <div class="grid lg:grid-cols-2 gap-12 items-start">
-          <div class="fade-in space-y-6">
-            <p class="text-indigo-100/80 leading-relaxed text-lg">${tool.desc}</p>
-            
-            <div class="grid grid-cols-2 gap-4">
-              <div class="tool-card p-5 rounded-2xl">
-                <h4 class="text-white font-bold mb-3 text-sm">المميزات الرئيسية</h4>
-                <ul class="space-y-2 text-xs text-indigo-200/60">
-                  ${tool.features.map(f => `<li class="flex items-center gap-2"><i data-lucide="check-circle-2" style="width:14px;height:14px;color:${tool.color}"></i>${f}</li>`).join('')}
-                </ul>
-              </div>
-              <div class="tool-card p-5 rounded-2xl">
-                <h4 class="text-white font-bold mb-3 text-sm">الفوائد الصحفية</h4>
-                <ul class="space-y-2 text-xs text-indigo-200/60">
-                  ${tool.advantages.map(a => `<li class="flex items-center gap-2"><i data-lucide="zap" style="width:14px;height:14px;color:${tool.color}"></i>${a}</li>`).join('')}
-                </ul>
-              </div>
+    const container = document.getElementById('toolPages');
+    container.innerHTML = tools.map(tool => `
+        <section class="page-section px-6 border-t border-white/5">
+            <div class="max-w-5xl mx-auto w-full">
+                <div class="mb-8">
+                    <h2 class="text-4xl font-bold text-white mb-2">${tool.name}</h2>
+                    <p class="text-indigo-300">${tool.tagline}</p>
+                </div>
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <div>
+                        <p class="text-indigo-100/80 mb-6">${tool.desc}</p>
+                        ${tool.customDemo || ''}
+                    </div>
+                    <div class="tool-card p-6 border-2" style="border-color:${tool.color}30">
+                        <h3 class="text-xl font-bold mb-4">حالة استخدام</h3>
+                        <p class="text-indigo-100/70">${tool.useCase.text}</p>
+                    </div>
+                </div>
             </div>
-
-            ${tool.customDemo ? tool.customDemo : ''}
-
-            <div class="flex gap-4 pt-4">
-              <a href="${tool.link}" target="_blank" class="btn-primary" style="background:linear-gradient(135deg,${tool.color},#000)">جرب الأداة الآن</a>
-              <button class="btn-ghost" onclick="window.open('${tool.videoUrl}', '_blank')"><i data-lucide="play-circle" style="width:16px;height:16px"></i> شاهد شرح</button>
-            </div>
-          </div>
-
-          <div class="fade-in">
-            <div class="tool-card p-8 rounded-3xl border-2" style="border-color:${tool.color}30">
-               <div class="flex items-center gap-3 mb-6">
-                 <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background:${tool.color}20"><i data-lucide="briefcase" style="color:${tool.color};width:20px;height:20px"></i></div>
-                 <h3 class="text-xl font-bold text-white">حالة استخدام</h3>
-               </div>
-               <h4 class="text-lg font-semibold text-white mb-3">${tool.useCase.title}</h4>
-               <p class="text-indigo-100/70 leading-relaxed">${tool.useCase.text}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  `).join('');
-  lucide.createIcons();
+        </section>
+    `).join('');
+    lucide.createIcons();
 }
-// تأكدي من استدعاء renderTools() عند تحميل الصفحة
-window.onload = () => { renderTools(); initQuiz(); updateNav(); };
+
+window.onload = renderTools;
 </script>
+</body>
+</html>
