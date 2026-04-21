@@ -1,206 +1,196 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>المشهد الذكي - مجلة تفاعلية</title>
-    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
-    <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        html,body{height:100%;margin:0}
-        body{font-family:'Cairo', sans-serif}
-        .magazine-wrapper{height:100%;overflow-y:auto;scroll-behavior:smooth;scroll-snap-type:y proximity}
-        .page-section{min-height:100%;scroll-snap-align:start;position:relative}
-        .grid-bg{background-image:linear-gradient(rgba(99,102,241,0.08) 1px,transparent 1px),linear-gradient(90deg,rgba(99,102,241,0.08) 1px,transparent 1px);background-size:40px 40px;animation:gridMove 20s linear infinite}
-        @keyframes gridMove{0%{background-position:0 0} 100%{background-position:40px 40px}}
-        .orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:0.4;animation:orbFloat 8s ease-in-out infinite alternate}
-        @keyframes orbFloat{0%{transform:translate(0,0) scale(1)} 100%{transform:translate(30px,-20px) scale(1.15)}}
-        .fade-in{opacity:0;transform:translateY(30px);transition:opacity 0.7s ease,transform 0.7s ease}
-        .fade-in.visible{opacity:1;transform:translateY(0)}
-        .tool-card{background:rgba(15,15,25,0.7);backdrop-filter:blur(20px);border:1px solid rgba(99,102,241,0.15);transition:all 0.4s cubic-bezier(0.4,0,0.2,1)}
-        .tool-card:hover{border-color:rgba(99,102,241,0.5);transform:translateY(-4px)}
-        .btn-primary{background:linear-gradient(135deg,#6366f1,#8b5cf6);color:white;padding:10px 24px;border-radius:10px;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:0.3s}
-        .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(99,102,241,0.4)}
-        .quiz-btn{transition:all 0.3s;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1)}
-        .quiz-btn.correct{background:rgba(34,197,94,0.2)!important;border-color:#22c55e!important;color:#86efac!important}
-        .quiz-btn.incorrect{background:rgba(239,68,68,0.2)!important;border-color:#ef4444!important;color:#fca5a5!important}
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>المشهد الذكي</title>
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+<style>
+html,body{height:100%;margin:0}
+*{box-sizing:border-box}
+body{font-family:'Cairo', sans-serif}
+.mono{font-family:'Space Mono',monospace}
+.magazine-wrapper{height:100%;overflow-y:auto;overflow-x:hidden;scroll-behavior:smooth;scroll-snap-type:y proximity}
+.page-section{min-height:100%;scroll-snap-align:start}
+.grid-bg{background-image:linear-gradient(rgba(99,102,241,0.08) 1px,transparent 1px),linear-gradient(90deg,rgba(99,102,241,0.08) 1px,transparent 1px);background-size:40px 40px;animation:gridMove 20s linear infinite}
+@keyframes gridMove{0%{background-position:0 0}100%{background-position:40px 40px}}
+.orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:0.4;animation:orbFloat 8s ease-in-out infinite alternate}
+@keyframes orbFloat{0%{transform:translate(0,0) scale(1)}100%{transform:translate(30px,-20px) scale(1.15)}}
+.fade-in{opacity:0;transform:translateY(30px);transition:opacity 0.7s ease,transform 0.7s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+.tool-card{background:rgba(15,15,25,0.7);backdrop-filter:blur(20px);border:1px solid rgba(99,102,241,0.15);transition:all 0.4s cubic-bezier(0.4,0,0.2,1)}
+.tool-card:hover{border-color:rgba(99,102,241,0.5);transform:translateY(-4px);box-shadow:0 20px 60px rgba(99,102,241,0.15)}
+.btn-primary{background:linear-gradient(135deg,#6366f1,#8b5cf6);color:white;padding:10px 24px;border-radius:10px;font-weight:600;cursor:pointer;transition:all 0.3s;display:inline-flex;align-items:center;gap:8px}
+.quiz-btn{transition:all 0.3s; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1)}
+.quiz-btn.correct{background:rgba(34,197,94,0.1)!important;border-color:rgb(34,197,94)!important;color:rgb(134,239,172)!important}
+.quiz-btn.incorrect{background:rgba(239,68,68,0.1)!important;border-color:rgb(239,68,68)!important;color:rgb(252,165,165)!important}
+.custom-audio { filter: invert(100%) hue-rotate(180deg) brightness(1.5); }
+</style>
 </head>
-<body class="bg-[#08081a] text-white">
+<body class="h-full bg-[#08081a] text-white">
 
 <div class="magazine-wrapper" id="magazine">
 
-    <section class="page-section flex items-center justify-center grid-bg" id="sec-cover">
-        <div class="orb w-80 h-80 bg-indigo-600 top-10 right-10"></div>
-        <div class="orb w-64 h-64 bg-purple-500 bottom-20 left-10" style="animation-delay:2s"></div>
-        <div class="relative z-10 text-center px-6 fade-in">
-            <div class="text-xs tracking-[0.3em] text-indigo-400 mb-6 uppercase">العدد الأول — أبريل 2026</div>
-            <h1 class="text-6xl sm:text-8xl font-black mb-4 bg-gradient-to-r from-white to-indigo-400 bg-clip-text text-transparent">المشهد الذكي</h1>
-            <p class="text-xl sm:text-2xl font-light text-indigo-200 mb-10">دليلك التفاعلي لإتقان أدوات الذكاء الاصطناعي في إنتاج الفيديو</p>
-            <button class="btn-primary" onclick="document.getElementById('sec-editorial').scrollIntoView({behavior:'smooth'})">
-                <i data-lucide="book-open"></i> ابدأ القراءة
-            </button>
-        </div>
-    </section>
+<section class="page-section relative flex items-center justify-center grid-bg" id="sec-cover">
+  <div class="orb" style="width:300px;height:300px;background:#6366f1;top:10%;right:5%"></div>
+  <div class="orb" style="width:250px;height:250px;background:#a78bfa;bottom:15%;left:10%;animation-delay:3s"></div>
+  <div class="relative z-10 text-center px-6 max-w-3xl fade-in">
+    <div class="mono text-xs tracking-[0.3em] text-indigo-400 mb-6 uppercase">العدد الأول — أبريل 2026</div>
+    <h1 class="text-5xl sm:text-7xl font-extrabold leading-tight mb-4" style="background:linear-gradient(135deg,#fff 30%,#a78bfa 70%,#6366f1);-webkit-background-clip:text;-webkit-text-fill-color:transparent">المشهد الذكي</h1>
+    <p class="text-xl sm:text-2xl font-light text-indigo-200 mb-10">دليلك التفاعلي لأدوات الذكاء الاصطناعي في إنتاج الفيديو</p>
+    <button class="btn-primary" onclick="document.getElementById('sec-editorial').scrollIntoView({behavior:'smooth'})">ابدأ القراءة</button>
+  </div>
+</section>
 
-    <section class="page-section flex items-center px-6 py-20" id="sec-editorial">
-        <div class="max-w-4xl mx-auto w-full">
-            <div class="fade-in mb-8">
-                <div class="text-indigo-400 text-sm mb-2 uppercase tracking-widest">كلمة المحرر</div>
-                <h2 class="text-4xl font-bold">في قلب الثورة الإبداعية</h2>
-            </div>
-            <div class="grid md:grid-cols-2 gap-10">
-                <div class="fade-in space-y-6 text-indigo-100/80 leading-relaxed">
-                    <p>هذه المجلة ليست مجرد رصد للتقنيات، بل هي وسيلة إعلامية صُممت بناءً على معايير "ثراء الوسائط" لتقليل الغموض حول تقنيات الذكاء الاصطناعي.</p>
-                    <p>نحن نؤمن بأن الأداة لا تكتمل إلا بـ <strong class="text-white">البصمة البشرية</strong>؛ لذا نضع بين يديك الدليل العملي لتمكين رؤيتك الإبداعية وتحويلها إلى واقع ملموس.</p>
-                    <p class="text-indigo-400 font-bold">— هيا صالح الحظيف</p>
-                </div>
-                <div class="fade-in tool-card rounded-2xl p-6">
-                    <h3 class="text-white font-bold mb-4 flex items-center gap-2"><i data-lucide="bar-chart"></i> الأرقام تتحدث</h3>
-                    <div class="space-y-4">
-                        <div class="flex justify-between"><span>وقت الإنتاج المختصر</span><span class="text-indigo-400">85%</span></div>
-                        <div class="w-full bg-white/5 h-2 rounded-full overflow-hidden"><div class="bg-indigo-500 h-full w-[85%]"></div></div>
-                        <div class="flex justify-between"><span>زيادة الإنتاجية</span><span class="text-purple-400">10x</span></div>
-                    </div>
-                </div>
-            </div>
+<section class="page-section relative px-6 py-20 flex items-center" id="sec-editorial">
+  <div class="max-w-4xl mx-auto w-full">
+    <div class="fade-in">
+      <div class="mono text-xs tracking-[0.2em] text-indigo-400 mb-3">كلمة المحرر</div>
+      <h2 class="text-4xl font-bold mb-8 text-white">في قلب الثورة الإبداعية</h2>
+    </div>
+    <div class="grid md:grid-cols-2 gap-8">
+      <div class="fade-in space-y-6 text-indigo-100/80 leading-relaxed text-right">
+        <p>هذه المجلة صُممت بناءً على معايير "ثراء الوسائط" لتقليل الغموض حول تقنيات الذكاء الاصطناعي.</p>
+        <p>نحن نؤمن بأن الأداة لا تكتمل إلا بـ <strong class="text-white">البصمة البشرية</strong>؛ لذا نضع بين يديك الدليل العملي لتمكين رؤيتك الإبداعية.</p>
+        <p class="text-indigo-400">— هيا صالح الحظيف</p>
+        
+        <div class="mt-8 p-4 rounded-xl bg-white/5 border border-indigo-500/20">
+            <p class="text-[10px] text-indigo-400 mb-2 mono uppercase tracking-widest italic text-center">استمع إلى البصمة الصوتية للمجلة</p>
+            <audio controls class="w-full h-8 custom-audio">
+                <source src="voice.mp3" type="audio/mpeg">
+                متصفحك لا يدعم تشغيل الصوت.
+            </audio>
         </div>
-    </section>
+      </div>
+      <div class="fade-in tool-card rounded-xl p-6">
+        <h3 class="text-white font-semibold mb-3 flex items-center gap-2">الأرقام تتحدث</h3>
+        <ul class="space-y-3 text-sm text-indigo-100/70">
+          <li class="flex justify-between"><span>وقت الإنتاج المختصر</span><strong class="text-indigo-300">85%</strong></li>
+          <li class="flex justify-between"><span>زيادة الإنتاجية</span><strong class="text-indigo-300">10x</strong></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <div id="toolPages"></div>
+<div id="toolPages"></div>
 
-    <section class="page-section flex items-center px-6 py-20 bg-white/5" id="sec-tutorial">
-        <div class="max-w-4xl mx-auto w-full">
-            <div class="fade-in mb-12 text-center">
-                <h2 class="text-4xl font-bold mb-4">كيف تبدأ مشروعك الاحترافي؟</h2>
-                <p class="text-indigo-300">خطوات عملية تعتمد على مهاراتك الصحفية أولاً</p>
-            </div>
-            <div class="grid gap-6">
-                <div class="tool-card p-6 rounded-xl flex gap-4 fade-in">
-                    <div class="bg-indigo-500 w-12 h-12 rounded-lg flex items-center justify-center font-bold">1</div>
-                    <div>
-                        <h4 class="font-bold mb-1">هندسة الفكرة (البصمة البشرية)</h4>
-                        <p class="text-sm text-indigo-100/60">ابدأ بصياغة "السيناريو" الذي يعكس رؤيتك الإبداعية؛ فالذكاء الاصطناعي ينفذ ما تخطط له أنت كصحفي مبدع.</p>
-                    </div>
-                </div>
-                <div class="tool-card p-6 rounded-xl flex gap-4 fade-in">
-                    <div class="bg-purple-500 w-12 h-12 rounded-lg flex items-center justify-center font-bold">2</div>
-                    <div>
-                        <h4 class="font-bold mb-1">اختيار الوسيلة الثرية</h4>
-                        <p class="text-sm text-indigo-100/60">حدد الأداة بناءً على احتياجك؛ Runway للمشاهد السينمائية، أو Descript للتحرير النصي السريع.</p>
-                    </div>
-                </div>
-            </div>
+<section class="page-section relative px-6 py-20 flex items-center" id="sec-tutorial">
+  <div class="max-w-4xl mx-auto w-full">
+    <div class="fade-in mb-10 text-right">
+      <div class="mono text-xs tracking-[0.2em] text-indigo-400 mb-3 uppercase">مقال تعليمي</div>
+      <h2 class="text-3xl sm:text-4xl font-bold text-white mb-2">كيف تبدأ مشروع فيديو احترافي؟</h2>
+    </div>
+    <div class="space-y-6">
+        <div class="tool-card rounded-xl p-6 fade-in border-r-4 border-indigo-500 text-right">
+            <h4 class="font-bold text-white mb-2">1. هندسة الفكرة (البصمة البشرية)</h4>
+            <p class="text-sm text-indigo-100/70 leading-relaxed">ابدأ بصياغة سيناريو يعكس رؤيتك الشخصية؛ فالذكاء الاصطناعي مجرد أداة تنفيذية لروحك القصصية التي تبنيها بنفسك.</p>
         </div>
-    </section>
-
-    <section class="page-section flex items-center px-6 py-20" id="sec-quiz">
-        <div class="max-w-4xl mx-auto w-full">
-            <div class="fade-in text-center mb-12">
-                <h2 class="text-4xl font-bold">اختبر معلوماتك</h2>
-                <p class="text-indigo-300/70 mt-2">قيّم مدى جاهزيتك لاستخدام أدوات المستقبل</p>
-            </div>
-            <div id="quizContainer" class="space-y-6"></div>
+        <div class="tool-card rounded-xl p-6 fade-in border-r-4 border-purple-500 text-right">
+            <h4 class="font-bold text-white mb-2">2. اختيار الأداة المناسبة</h4>
+            <p class="text-sm text-indigo-100/70 leading-relaxed">حدد الأداة بناءً على احتياج المشهد؛ Runway للمشاهد الفنية، أو Kling للحركة الواقعية الطويلة.</p>
         </div>
-    </section>
+    </div>
+  </div>
+</section>
 
-    <section class="page-section flex items-center justify-center text-center px-6" id="sec-footer">
-        <div class="fade-in">
-            <h2 class="text-5xl font-bold mb-6">المستقبل ذكي.. وأنت محركه</h2>
-            <p class="text-indigo-200/60 max-w-xl mx-auto mb-10">مشروع تخرج - مسار التحرير الصحفي وصناعة المحتوى</p>
-            <div class="text-xs mono opacity-30">© 2026 المشهد الذكي - جميع الحقوق محفوظة</div>
-        </div>
-    </section>
+<section class="page-section relative px-6 py-20 flex items-center" id="sec-quiz">
+  <div class="max-w-4xl mx-auto w-full">
+    <div class="fade-in text-center mb-12">
+      <h2 class="text-4xl font-bold text-white mb-2">اختبر معلوماتك</h2>
+      <p class="text-indigo-300/60 text-sm">قيّم مدى استيعابك لأدوات المشهد الذكي</p>
+    </div>
+    <div id="quizContainer" class="space-y-6"></div>
+  </div>
+</section>
 
 </div>
 
 <script>
-    // بيانات الأدوات المطورة
-    const tools = [
-        {
-            id: "runway", num: "02", name: "Runway Gen-3", tagline: "المخرج السينمائي الرقمي",
-            desc: "نموذج متطور يولد فيديوهات عالية الجودة مع فهم عميق للفيزياء والحركة.",
-            features: ["توليد من النص", "فرشاة الحركة", "دقة 4K"],
-            link: "https://runwayml.com", color: "#6366f1"
-        },
-        {
-            id: "kling", num: "03", name: "Kling AI", tagline: "محاكي الواقع في فيديوهات طويلة",
-            desc: "يتميز بإنتاج مقاطع تصل لدقيقتين مع حركة بشرية طبيعية جداً.",
-            features: ["مقاطع طويلة", "فيزياء واقعية", "استمرارية الشخصيات"],
-            link: "https://klingai.com", color: "#a78bfa"
-        },
-        {
-            id: "descript", num: "04", name: "Descript", tagline: "المونتاج بأسلوب الكتابة",
-            desc: "يجعل تحرير الفيديو سهلاً كتحرير مستند نصي؛ احذف الكلمة يختفي المقطع.",
-            features: ["تحرير نصي", "إزالة التأتأة", "استنساخ الصوت"],
-            link: "https://descript.com", color: "#8b5cf6"
-        }
-    ];
+const tools = [
+  {
+    id:"runway", num:"02", name:"Runway Gen-3", tagline:"توليد الفيديو من النص والصور",
+    desc:"نموذج متطور يولد فيديوهات عالية الجودة مع فهم عميق للفيزياء والحركة.",
+    features:["تحريك الصور", "فرشاة الحركة", "دقة 4K"],
+    useCase:"يستخدمه طالب صانع أفلام لتصور مشاهد مشروع تخرجه السينمائي دون ميزانية.",
+    color:"#6366f1"
+  },
+  {
+    id:"kling", num:"03", name:"Kling AI", tagline:"محاكاة فيزياء واقعية",
+    desc:"يتميز بإنتاج مقاطع فيديو طويلة تصل لدقيقتين مع حركة بشرية طبيعية.",
+    features:["مقاطع طويلة", "فيزياء واقعية", "استمرارية عالية"],
+    useCase:"يستخدم لإنتاج قصص بصرية طويلة تحافظ على ثبات ملامح الشخصيات عبر المشاهد.",
+    color:"#a78bfa"
+  },
+  {
+      id:"descript", num:"04", name:"Descript", tagline:"تحرير الفيديو كمستند",
+      desc:"يحول تحرير الفيديو إلى نصوص قابلة للتعديل؛ احذف الكلمة يختفي المقطع فوراً.",
+      features:["تحرير نصي", "إزالة كلمات التعبئة", "استنساخ الصوت"],
+      useCase:"يستخدمه محرر صحفي لتنظيف تسجيلات المقابلات الطويلة وتحويلها لمحتوى جاهز للنشر.",
+      color:"#8b5cf6"
+  }
+];
 
-    // بيانات الاختبار
-    const quizData = [
-        { q: "تريد تحويل مقال صحفي لفيديو سريع لمنصات التواصل، ماذا تختار؟", options: ["Runway", "Pictory", "ElevenLabs"], correct: 1 },
-        { q: "أداة تتيح لك حذف الكلمات من الفيديو بمجرد حذفها من النص؟", options: ["Kling AI", "ElevenLabs", "Descript"], correct: 2 },
-        { q: "أهم عنصر لضمان نجاح مشروعك قبل استخدام الذكاء الاصطناعي؟", options: ["سرعة الإنترنت", "البصمة البشرية والسيناريو", "نوع الجهاز"], correct: 1 }
-    ];
+const quizData = [
+    { q: "تريد تحويل مقال صحفي لفيديو سريع لمنصات التواصل، ماذا تختار؟", options: ["Runway", "Pictory", "ElevenLabs"], correct: 1 },
+    { q: "أهم عنصر لضمان نجاح مشروعك قبل استخدام الذكاء الاصطناعي؟", options: ["سرعة المعالج", "البصمة البشرية والسيناريو", "التصميم الجاهز"], correct: 1 },
+    { q: "أي أداة تتيح لك تحرير الفيديو عن طريق حذف الكلمات من النص؟", options: ["Kling AI", "Descript", "Runway"], correct: 1 }
+];
 
-    // بناء الصفحات
-    function init() {
-        const toolContainer = document.getElementById('toolPages');
-        tools.forEach(tool => {
-            toolContainer.innerHTML += `
-                <section class="page-section flex items-center px-6 py-20" id="sec-${tool.id}">
-                    <div class="max-w-4xl mx-auto w-full">
-                        <div class="fade-in mb-8">
-                            <div class="text-indigo-400 text-sm mb-2">${tool.num} / ${tool.name}</div>
-                            <h2 class="text-5xl font-bold mb-4">${tool.name}</h2>
-                            <p class="text-xl text-indigo-200/70">${tool.tagline}</p>
-                        </div>
-                        <div class="tool-card rounded-2xl p-8 border-r-4" style="border-color:${tool.color}">
-                            <p class="mb-6 leading-relaxed text-indigo-100/80">${tool.desc}</p>
-                            <ul class="flex flex-wrap gap-4 mb-8">
-                                ${tool.features.map(f => `<li class="bg-white/5 px-3 py-1 rounded-full text-xs">• ${f}</li>`).join('')}
-                            </ul>
-                            <a href="${tool.link}" target="_blank" class="btn-primary" style="background:${tool.color}">جربها الآن</a>
-                        </div>
-                    </div>
-                </section>
-            `;
-        });
-
-        const quizContainer = document.getElementById('quizContainer');
-        quizData.forEach((q, idx) => {
-            quizContainer.innerHTML += `
-                <div class="tool-card p-6 rounded-xl fade-in">
-                    <p class="mb-4 font-bold">${idx + 1}. ${q.q}</p>
-                    <div class="grid sm:grid-cols-3 gap-3">
-                        ${q.options.map((opt, oIdx) => `<button class="quiz-btn py-3 rounded-lg text-sm" onclick="checkAnswer(this, ${idx}, ${oIdx})">${opt}</button>`).join('')}
+function init() {
+    const toolContainer = document.getElementById('toolPages');
+    tools.forEach(tool => {
+        toolContainer.innerHTML += `
+        <section class="page-section relative px-6 py-20 flex items-center" id="sec-${tool.id}">
+            <div class="max-w-4xl mx-auto w-full">
+                <div class="fade-in mb-8 text-right">
+                    <div class="mono text-xs text-indigo-400 mb-3 tracking-widest">${tool.num} / ${tool.name}</div>
+                    <h2 class="text-4xl font-bold text-white">${tool.name}</h2>
+                </div>
+                <div class="tool-card rounded-xl p-8 border-l-4 text-right" style="border-color:${tool.color}">
+                    <p class="text-indigo-100/80 mb-6 leading-relaxed">${tool.desc}</p>
+                    <div class="text-sm text-indigo-400 font-bold mb-2 uppercase tracking-tighter">حالة استخدام عملي:</div>
+                    <p class="text-sm text-indigo-100/60 mb-6 italic leading-relaxed">"${tool.useCase}"</p>
+                    <div class="flex flex-wrap gap-3 justify-end">
+                        ${tool.features.map(f => `<span class="text-[10px] bg-indigo-500/10 border border-indigo-500/20 px-3 py-1 rounded-full text-indigo-300 tracking-wide">${f}</span>`).join('')}
                     </div>
                 </div>
-            `;
-        });
+            </div>
+        </section>`;
+    });
 
-        lucide.createIcons();
-        setupObserver();
-    }
+    const quizContainer = document.getElementById('quizContainer');
+    quizData.forEach((item, idx) => {
+        quizContainer.innerHTML += `
+        <div class="tool-card rounded-xl p-6 fade-in text-right">
+            <p class="text-white mb-4 font-medium">${idx + 1}. ${item.q}</p>
+            <div class="grid sm:grid-cols-3 gap-3">
+                ${item.options.map((opt, oIdx) => `<button class="quiz-btn py-3 rounded-lg text-sm font-semibold transition-all hover:bg-white/10" onclick="checkAnswer(this, ${idx}, ${oIdx})">${opt}</button>`).join('')}
+            </div>
+        </div>`;
+    });
 
-    function checkAnswer(btn, qIdx, oIdx) {
-        const isCorrect = oIdx === quizData[qIdx].correct;
-        btn.classList.add(isCorrect ? 'correct' : 'incorrect');
-        Array.from(btn.parentElement.children).forEach(b => b.disabled = true);
-    }
+    lucide.createIcons();
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+}
 
-    function setupObserver() {
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('visible');
-            });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-    }
+function checkAnswer(btn, qIdx, oIdx) {
+    const isCorrect = oIdx === quizData[qIdx].correct;
+    const parent = btn.parentElement;
+    Array.from(parent.children).forEach(b => {
+        b.disabled = true;
+        b.style.opacity = "0.5";
+    });
+    btn.style.opacity = "1";
+    btn.classList.add(isCorrect ? 'correct' : 'incorrect');
+}
 
-    init();
+init();
 </script>
 </body>
 </html>
