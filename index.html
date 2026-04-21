@@ -1,582 +1,206 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>المشهد الذكي</title>
-<script src="https://cdn.tailwindcss.com/3.4.17"></script>
-<script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<style>
-html,body{height:100%;margin:0}
-*{box-sizing:border-box}
-body{font-family:'Sora',sans-serif}
-.mono{font-family:'Space Mono',monospace}
-.magazine-wrapper{height:100%;overflow-y:auto;overflow-x:hidden;scroll-behavior:smooth;scroll-snap-type:y proximity}
-.page-section{min-height:100%;scroll-snap-align:start}
-.grid-bg{background-image:linear-gradient(rgba(99,102,241,0.08) 1px,transparent 1px),linear-gradient(90deg,rgba(99,102,241,0.08) 1px,transparent 1px);background-size:40px 40px;animation:gridMove 20s linear infinite}
-@keyframes gridMove{0%{background-position:0 0}100%{background-position:40px 40px}}
-.orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:0.4;animation:orbFloat 8s ease-in-out infinite alternate}
-@keyframes orbFloat{0%{transform:translate(0,0) scale(1)}100%{transform:translate(30px,-20px) scale(1.15)}}
-.fade-in{opacity:0;transform:translateY(30px);transition:opacity 0.7s ease,transform 0.7s ease}
-.fade-in.visible{opacity:1;transform:translateY(0)}
-.tool-card{background:rgba(15,15,25,0.7);backdrop-filter:blur(20px);border:1px solid rgba(99,102,241,0.15);transition:all 0.4s cubic-bezier(0.4,0,0.2,1)}
-.tool-card:hover{border-color:rgba(99,102,241,0.5);transform:translateY(-4px);box-shadow:0 20px 60px rgba(99,102,241,0.15)}
-.nav-dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.2);transition:all 0.3s;cursor:pointer}
-.nav-dot.active{background:#818cf8;box-shadow:0 0 12px rgba(129,140,248,0.6);transform:scale(1.3)}
-@keyframes pulse-glow{0%,100%{box-shadow:0 0 20px rgba(99,102,241,0.3)}50%{box-shadow:0 0 40px rgba(99,102,241,0.6)}}
-.expand-content{max-height:0;overflow:hidden;transition:max-height 0.5s ease}
-.expand-content.open{max-height:600px}
-.reading-progress{position:fixed;top:0;right:0;height:3px;z-index:100;background:linear-gradient(90deg,#6366f1,#a78bfa,#c084fc);transition:width 0.15s}
-.qr-box{width:100px;height:100px;background:white;border-radius:8px;display:grid;grid-template-columns:repeat(7,1fr);grid-template-rows:repeat(7,1fr);padding:6px;gap:1px}
-.qr-cell{border-radius:1px}
-.qr-dark{background:#1e1b4b}
-.qr-light{background:white}
-.btn-primary{background:linear-gradient(135deg,#6366f1,#8b5cf6);color:white;padding:10px 24px;border-radius:10px;font-weight:600;font-size:14px;border:none;cursor:pointer;transition:all 0.3s;display:inline-flex;align-items:center;gap:8px}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(99,102,241,0.4)}
-.btn-ghost{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:#c7d2fe;padding:8px 18px;border-radius:8px;font-size:13px;cursor:pointer;transition:all 0.3s;display:inline-flex;align-items:center;gap:6px}
-.btn-ghost:hover{background:rgba(255,255,255,0.12);border-color:rgba(99,102,241,0.4)}
-.quiz-btn{transition:all 0.3s}
-.quiz-btn.correct{background:rgba(34,197,94,0.1)!important;border-color:rgb(34,197,94)!important;color:rgb(134,239,172)!important}
-.quiz-btn.incorrect{background:rgba(239,68,68,0.1)!important;border-color:rgb(239,68,68)!important;color:rgb(252,165,165)!important}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المشهد الذكي - مجلة تفاعلية</title>
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        html,body{height:100%;margin:0}
+        body{font-family:'Cairo', sans-serif}
+        .magazine-wrapper{height:100%;overflow-y:auto;scroll-behavior:smooth;scroll-snap-type:y proximity}
+        .page-section{min-height:100%;scroll-snap-align:start;position:relative}
+        .grid-bg{background-image:linear-gradient(rgba(99,102,241,0.08) 1px,transparent 1px),linear-gradient(90deg,rgba(99,102,241,0.08) 1px,transparent 1px);background-size:40px 40px;animation:gridMove 20s linear infinite}
+        @keyframes gridMove{0%{background-position:0 0} 100%{background-position:40px 40px}}
+        .orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:0.4;animation:orbFloat 8s ease-in-out infinite alternate}
+        @keyframes orbFloat{0%{transform:translate(0,0) scale(1)} 100%{transform:translate(30px,-20px) scale(1.15)}}
+        .fade-in{opacity:0;transform:translateY(30px);transition:opacity 0.7s ease,transform 0.7s ease}
+        .fade-in.visible{opacity:1;transform:translateY(0)}
+        .tool-card{background:rgba(15,15,25,0.7);backdrop-filter:blur(20px);border:1px solid rgba(99,102,241,0.15);transition:all 0.4s cubic-bezier(0.4,0,0.2,1)}
+        .tool-card:hover{border-color:rgba(99,102,241,0.5);transform:translateY(-4px)}
+        .btn-primary{background:linear-gradient(135deg,#6366f1,#8b5cf6);color:white;padding:10px 24px;border-radius:10px;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:0.3s}
+        .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(99,102,241,0.4)}
+        .quiz-btn{transition:all 0.3s;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1)}
+        .quiz-btn.correct{background:rgba(34,197,94,0.2)!important;border-color:#22c55e!important;color:#86efac!important}
+        .quiz-btn.incorrect{background:rgba(239,68,68,0.2)!important;border-color:#ef4444!important;color:#fca5a5!important}
+    </style>
 </head>
-<body class="h-full bg-[#08081a] text-white">
-
-<div class="reading-progress" id="progressBar" style="width:0%"></div>
-<nav class="fixed left-4 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-3" id="sideNav"></nav>
+<body class="bg-[#08081a] text-white">
 
 <div class="magazine-wrapper" id="magazine">
 
-<!-- COVER -->
-<section class="page-section relative flex items-center justify-center grid-bg" data-page="cover" id="sec-cover">
-  <div class="orb" style="width:300px;height:300px;background:#6366f1;top:10%;right:5%"></div>
-  <div class="orb" style="width:250px;height:250px;background:#a78bfa;bottom:15%;left:10%;animation-delay:3s"></div>
-  <div class="orb" style="width:200px;height:200px;background:#c084fc;top:50%;right:60%;animation-delay:5s"></div>
-  <div class="relative z-10 text-center px-6 max-w-3xl fade-in">
-    <div class="mono text-xs tracking-[0.3em] text-indigo-400 mb-6 uppercase">العدد الأول — أبريل 2026</div>
-    <h1 id="coverTitle" class="text-5xl sm:text-7xl font-extrabold leading-tight mb-4" style="background:linear-gradient(135deg,#fff 30%,#a78bfa 70%,#6366f1);-webkit-background-clip:text;-webkit-text-fill-color:transparent">المشهد الذكي</h1>
-    <p id="coverSubtitle" class="text-xl sm:text-2xl font-light text-indigo-200 mb-10">دليلك التفاعلي لأدوات الذكاء الاصطناعي في إنتاج الفيديو</p>
-    <button class="btn-primary text-base" onclick="document.getElementById('sec-editorial').scrollIntoView({behavior:'smooth'})">
-      <i data-lucide="book-open" style="width:18px;height:18px"></i> ابدأ القراءة
-    </button>
-    <div class="mt-8 flex items-center justify-center gap-2 text-indigo-400/60 text-sm">
-      <i data-lucide="chevrons-down" style="width:16px;height:16px" class="animate-bounce"></i> مرر للاستكشاف
-    </div>
-  </div>
-</section>
+    <section class="page-section flex items-center justify-center grid-bg" id="sec-cover">
+        <div class="orb w-80 h-80 bg-indigo-600 top-10 right-10"></div>
+        <div class="orb w-64 h-64 bg-purple-500 bottom-20 left-10" style="animation-delay:2s"></div>
+        <div class="relative z-10 text-center px-6 fade-in">
+            <div class="text-xs tracking-[0.3em] text-indigo-400 mb-6 uppercase">العدد الأول — أبريل 2026</div>
+            <h1 class="text-6xl sm:text-8xl font-black mb-4 bg-gradient-to-r from-white to-indigo-400 bg-clip-text text-transparent">المشهد الذكي</h1>
+            <p class="text-xl sm:text-2xl font-light text-indigo-200 mb-10">دليلك التفاعلي لإتقان أدوات الذكاء الاصطناعي في إنتاج الفيديو</p>
+            <button class="btn-primary" onclick="document.getElementById('sec-editorial').scrollIntoView({behavior:'smooth'})">
+                <i data-lucide="book-open"></i> ابدأ القراءة
+            </button>
+        </div>
+    </section>
 
-<!-- EDITORIAL -->
-<section class="page-section relative px-6 py-20 flex items-center" data-page="editorial" id="sec-editorial">
-  <div class="max-w-4xl mx-auto w-full">
-    <div class="fade-in">
-      <div class="mono text-xs tracking-[0.2em] text-indigo-400 mb-3">كلمة المحرر</div>
-      <h2 class="text-4xl font-bold mb-8 text-white">في قلب الثورة الإبداعية</h2>
-    </div>
-    <div class="grid md:grid-cols-2 gap-8">
-      <div class="fade-in space-y-6 text-indigo-100/80 leading-relaxed">
-        <p>في عصر تتسارع فيه وتيرة التطور التقني، لم يعد إنتاج الفيديو الاحترافي حكراً على المختصين، بل أصبح متاحاً للجميع بفضل أدوات الذكاء الاصطناعي.</p>
-        <p>تأخذك مجلة <strong class="text-white">المشهد الذكي</strong> في رحلة تفاعلية لاستكشاف أبرز هذه الأدوات، وكيف يمكن استخدامها لتحويل الأفكار البسيطة إلى محتوى مرئي احترافي.</p>
-        <p>هدفنا هو تبسيط التقنية، وتمكينك من استخدامها بطريقة عملية وسهلة، سواء كنت مبتدئاً أو تسعى لتطوير مهاراتك في صناعة المحتوى.</p>
-        <p class="text-indigo-400">— فريق المشهد الذكي</p>
-      </div>
-      <div class="fade-in space-y-4">
-        <div class="tool-card rounded-xl p-6">
-          <h3 class="text-white font-semibold mb-3 flex items-center gap-2"><i data-lucide="trending-up" style="width:18px;height:18px;color:#6366f1"></i> الأرقام تتحدث</h3>
-          <ul class="space-y-3 text-sm text-indigo-100/70">
-            <li class="flex justify-between"><span>وقت الإنتاج المختصر</span><strong class="text-indigo-300">85%</strong></li>
-            <li class="flex justify-between"><span>زيادة الإنتاجية</span><strong class="text-indigo-300">10x</strong></li>
-            <li class="flex justify-between"><span>تكلفة أقل</span><strong class="text-indigo-300">90%</strong></li>
-            <li class="flex justify-between"><span>معظم الأدوات توفر نسخة مجانية</span><strong class="text-indigo-300">✓</strong></li>
-          </ul>
+    <section class="page-section flex items-center px-6 py-20" id="sec-editorial">
+        <div class="max-w-4xl mx-auto w-full">
+            <div class="fade-in mb-8">
+                <div class="text-indigo-400 text-sm mb-2 uppercase tracking-widest">كلمة المحرر</div>
+                <h2 class="text-4xl font-bold">في قلب الثورة الإبداعية</h2>
+            </div>
+            <div class="grid md:grid-cols-2 gap-10">
+                <div class="fade-in space-y-6 text-indigo-100/80 leading-relaxed">
+                    <p>هذه المجلة ليست مجرد رصد للتقنيات، بل هي وسيلة إعلامية صُممت بناءً على معايير "ثراء الوسائط" لتقليل الغموض حول تقنيات الذكاء الاصطناعي.</p>
+                    <p>نحن نؤمن بأن الأداة لا تكتمل إلا بـ <strong class="text-white">البصمة البشرية</strong>؛ لذا نضع بين يديك الدليل العملي لتمكين رؤيتك الإبداعية وتحويلها إلى واقع ملموس.</p>
+                    <p class="text-indigo-400 font-bold">— هيا صالح الحظيف</p>
+                </div>
+                <div class="fade-in tool-card rounded-2xl p-6">
+                    <h3 class="text-white font-bold mb-4 flex items-center gap-2"><i data-lucide="bar-chart"></i> الأرقام تتحدث</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between"><span>وقت الإنتاج المختصر</span><span class="text-indigo-400">85%</span></div>
+                        <div class="w-full bg-white/5 h-2 rounded-full overflow-hidden"><div class="bg-indigo-500 h-full w-[85%]"></div></div>
+                        <div class="flex justify-between"><span>زيادة الإنتاجية</span><span class="text-purple-400">10x</span></div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="tool-card rounded-xl p-6">
-          <h3 class="text-white font-semibold mb-3 flex items-center gap-2"><i data-lucide="star" style="width:18px;height:18px;color:#a78bfa"></i> عن هذه المجلة</h3>
-          <p class="text-sm text-indigo-100/70">مشروع تخرج جامعي يهدف إلى تعليم وتوعية الطلاب والمبدعين العرب بأحدث أدوات الذكاء الاصطناعي لإنتاج الفيديو.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- TABLE OF CONTENTS -->
-<section class="page-section relative px-6 py-20 flex items-center" data-page="toc" id="sec-toc">
-  <div class="max-w-4xl mx-auto w-full">
-    <div class="fade-in text-center mb-12">
-      <div class="mono text-xs tracking-[0.2em] text-indigo-400 mb-3">الفهرس</div>
-      <h2 class="text-4xl font-bold text-white">داخل هذا العدد</h2>
-    </div>
-    <div class="grid md:grid-cols-2 gap-4">
-      <button class="tool-card rounded-xl p-5 text-right hover:border-indigo-400/50 transition-all fade-in" onclick="document.getElementById('sec-intro').scrollIntoView({behavior:'smooth'})">
-        <div class="flex items-start justify-between">
-          <i data-lucide="arrow-right" style="width:16px;height:16px;color:#6366f1;flex-shrink:0;margin-top:2px"></i>
-          <div><div class="mono text-xs text-indigo-400 mb-2">المقدمة</div><h3 class="font-semibold text-white">الذكاء الاصطناعي يعيد تشكيل الفيديو</h3></div>
-        </div>
-      </button>
-      <button class="tool-card rounded-xl p-5 text-right hover:border-indigo-400/50 transition-all fade-in" onclick="document.getElementById('sec-tutorial1').scrollIntoView({behavior:'smooth'})">
-        <div class="flex items-start justify-between">
-          <i data-lucide="arrow-right" style="width:16px;height:16px;color:#8b5cf6;flex-shrink:0;margin-top:2px"></i>
-          <div><div class="mono text-xs text-indigo-400 mb-2">مقال تعليمي</div><h3 class="font-semibold text-white">ابدأ مشروع فيديو احترافي</h3></div>
-        </div>
-      </button>
-      <button class="tool-card rounded-xl p-5 text-right hover:border-indigo-400/50 transition-all fade-in" onclick="document.getElementById('sec-tutorial2').scrollIntoView({behavior:'smooth'})">
-        <div class="flex items-start justify-between">
-          <i data-lucide="arrow-right" style="width:16px;height:16px;color:#a78bfa;flex-shrink:0;margin-top:2px"></i>
-          <div><div class="mono text-xs text-indigo-400 mb-2">مقارنة</div><h3 class="font-semibold text-white">Runway مقابل Kling — أيهما تختار؟</h3></div>
-        </div>
-      </button>
-      <button class="tool-card rounded-xl p-5 text-right hover:border-indigo-400/50 transition-all fade-in" onclick="document.getElementById('sec-tutorial3').scrollIntoView({behavior:'smooth'})">
-        <div class="flex items-start justify-between">
-          <i data-lucide="arrow-right" style="width:16px;height:16px;color:#c084fc;flex-shrink:0;margin-top:2px"></i>
-          <div><div class="mono text-xs text-indigo-400 mb-2">نصائح احترافية</div><h3 class="font-semibold text-white">فن كتابة Prompt الاحترافي</h3></div>
-        </div>
-      </button>
-      <button class="tool-card rounded-xl p-5 text-right hover:border-indigo-400/50 transition-all fade-in" onclick="document.getElementById('sec-quiz').scrollIntoView({behavior:'smooth'})">
-        <div class="flex items-start justify-between">
-          <i data-lucide="arrow-right" style="width:16px;height:16px;color:#e879f9;flex-shrink:0;margin-top:2px"></i>
-          <div><div class="mono text-xs text-indigo-400 mb-2">اختبر معلوماتك</div><h3 class="font-semibold text-white">اختبر نفسك — 5 أسئلة</h3></div>
-        </div>
-      </button>
-      <button class="tool-card rounded-xl p-5 text-right hover:border-indigo-400/50 transition-all fade-in" onclick="document.getElementById('sec-resources').scrollIntoView({behavior:'smooth'})">
-        <div class="flex items-start justify-between">
-          <i data-lucide="arrow-right" style="width:16px;height:16px;color:#6366f1;flex-shrink:0;margin-top:2px"></i>
-          <div><div class="mono text-xs text-indigo-400 mb-2">المراجع</div><h3 class="font-semibold text-white">الموارد والروابط المفيدة</h3></div>
-        </div>
-      </button>
-    </div>
-  </div>
-</section>
+    <div id="toolPages"></div>
 
-<!-- INTRODUCTION -->
-<section class="page-section relative px-6 py-20 flex items-center" data-page="intro" id="sec-intro">
-  <div class="max-w-4xl mx-auto w-full">
-    <div class="fade-in">
-      <div class="mono text-xs tracking-[0.2em] text-indigo-400 mb-3">01 / المقدمة</div>
-      <h2 class="text-3xl sm:text-5xl font-bold mb-8" style="background:linear-gradient(135deg,#fff,#c7d2fe);-webkit-background-clip:text;-webkit-text-fill-color:transparent">الذكاء الاصطناعي يعيد تشكيل إنتاج الفيديو</h2>
-    </div>
-    <div class="grid md:grid-cols-2 gap-8">
-      <div class="fade-in space-y-5 text-indigo-100/80 leading-relaxed">
-        <p>لقد غيّر الذكاء الاصطناعي بشكل جذري إنتاج الفيديو — من كتابة السيناريو والتعليق الصوتي إلى المونتاج والمؤثرات البصرية. المهام التي كانت تتطلب فرقاً كبيرة وبرامج مكلفة يمكن الآن إنجازها في دقائق.</p>
-        <p>تستكشف هذه المجلة <strong class="text-white">خمس أدوات ذكاء اصطناعي رائدة</strong> تجعل الفيديو بجودة احترافية متاحاً للجميع: المبدعون والطلاب والمسوقون وصانعو الأفلام.</p>
-      </div>
-      <div class="fade-in grid grid-cols-2 gap-4">
-        <div class="tool-card rounded-xl p-5 text-center"><div class="text-3xl font-bold text-indigo-400">85%</div><div class="text-xs text-indigo-300/60 mt-1">تحرير أسرع مع الذكاء الاصطناعي</div></div>
-        <div class="tool-card rounded-xl p-5 text-center"><div class="text-3xl font-bold text-purple-400">10x</div><div class="text-xs text-indigo-300/60 mt-1">زيادة إنتاج المحتوى</div></div>
-        <div class="tool-card rounded-xl p-5 text-center"><div class="text-3xl font-bold text-violet-400">مجاني</div><div class="text-xs text-indigo-300/60 mt-1">خطة مجانية متاحة بميزات محدودة</div></div>
-        <div class="tool-card rounded-xl p-5 text-center"><div class="text-3xl font-bold text-fuchsia-400">5</div><div class="text-xs text-indigo-300/60 mt-1">الأدوات المغطاة هنا</div></div>
-      </div>
-    </div>
-  </div>
-</section>
+    <section class="page-section flex items-center px-6 py-20 bg-white/5" id="sec-tutorial">
+        <div class="max-w-4xl mx-auto w-full">
+            <div class="fade-in mb-12 text-center">
+                <h2 class="text-4xl font-bold mb-4">كيف تبدأ مشروعك الاحترافي؟</h2>
+                <p class="text-indigo-300">خطوات عملية تعتمد على مهاراتك الصحفية أولاً</p>
+            </div>
+            <div class="grid gap-6">
+                <div class="tool-card p-6 rounded-xl flex gap-4 fade-in">
+                    <div class="bg-indigo-500 w-12 h-12 rounded-lg flex items-center justify-center font-bold">1</div>
+                    <div>
+                        <h4 class="font-bold mb-1">هندسة الفكرة (البصمة البشرية)</h4>
+                        <p class="text-sm text-indigo-100/60">ابدأ بصياغة "السيناريو" الذي يعكس رؤيتك الإبداعية؛ فالذكاء الاصطناعي ينفذ ما تخطط له أنت كصحفي مبدع.</p>
+                    </div>
+                </div>
+                <div class="tool-card p-6 rounded-xl flex gap-4 fade-in">
+                    <div class="bg-purple-500 w-12 h-12 rounded-lg flex items-center justify-center font-bold">2</div>
+                    <div>
+                        <h4 class="font-bold mb-1">اختيار الوسيلة الثرية</h4>
+                        <p class="text-sm text-indigo-100/60">حدد الأداة بناءً على احتياجك؛ Runway للمشاهد السينمائية، أو Descript للتحرير النصي السريع.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<!-- TOOL PAGES -->
-<div id="toolPages"></div>
+    <section class="page-section flex items-center px-6 py-20" id="sec-quiz">
+        <div class="max-w-4xl mx-auto w-full">
+            <div class="fade-in text-center mb-12">
+                <h2 class="text-4xl font-bold">اختبر معلوماتك</h2>
+                <p class="text-indigo-300/70 mt-2">قيّم مدى جاهزيتك لاستخدام أدوات المستقبل</p>
+            </div>
+            <div id="quizContainer" class="space-y-6"></div>
+        </div>
+    </section>
 
-<!-- TUTORIAL 1 -->
-<section class="page-section relative px-6 py-20 flex items-center" data-page="tutorial1" id="sec-tutorial1">
-  <div class="max-w-4xl mx-auto w-full">
-    <div class="fade-in mb-10">
-      <div class="mono text-xs tracking-[0.2em] text-indigo-400 mb-3">مقال تعليمي</div>
-      <h2 class="text-3xl sm:text-4xl font-bold text-white mb-2">كيف تبدأ مشروع فيديو احترافي بالذكاء الاصطناعي</h2>
-      <p class="text-indigo-300/70">خطوات عملية من البداية حتى النهاية</p>
-    </div>
-    <div class="space-y-6">
-      <div class="tool-card rounded-xl p-6 fade-in border-r-4 border-indigo-500">
-        <div class="flex items-start gap-4">
-          <div class="flex-shrink-0 w-8 h-8 rounded-full bg-indigo-500/20 flex items-center justify-center text-indigo-400 font-bold text-sm">1</div>
-          <div><h3 class="font-semibold text-white mb-2">حدد هدفك وجمهورك</h3><p class="text-indigo-100/70 text-sm">قبل أي شيء، اسأل نفسك: ما الرسالة التي أريد توصيلها؟ من هو جمهوري؟ هل هذا فيديو تعليمي، إعلاني، أم ترفيهي؟</p></div>
+    <section class="page-section flex items-center justify-center text-center px-6" id="sec-footer">
+        <div class="fade-in">
+            <h2 class="text-5xl font-bold mb-6">المستقبل ذكي.. وأنت محركه</h2>
+            <p class="text-indigo-200/60 max-w-xl mx-auto mb-10">مشروع تخرج - مسار التحرير الصحفي وصناعة المحتوى</p>
+            <div class="text-xs mono opacity-30">© 2026 المشهد الذكي - جميع الحقوق محفوظة</div>
         </div>
-      </div>
-      <div class="tool-card rounded-xl p-6 fade-in border-r-4 border-purple-500">
-        <div class="flex items-start gap-4">
-          <div class="flex-shrink-0 w-8 h-8 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-400 font-bold text-sm">2</div>
-          <div><h3 class="font-semibold text-white mb-2">اكتب سكريبت واضح</h3><p class="text-indigo-100/70 text-sm">اكتب السيناريو أو التعليقات بوضوح. إذا كان لديك فقط موضوع عام، استخدم ChatGPT لمساعدتك في كتابة نص احترافي.</p></div>
-        </div>
-      </div>
-      <div class="tool-card rounded-xl p-6 fade-in border-r-4 border-violet-500">
-        <div class="flex items-start gap-4">
-          <div class="flex-shrink-0 w-8 h-8 rounded-full bg-violet-500/20 flex items-center justify-center text-violet-400 font-bold text-sm">3</div>
-          <div><h3 class="font-semibold text-white mb-2">اختر الأداة المناسبة</h3><p class="text-indigo-100/70 text-sm">هل تريد توليد فيديو من الصفر؟ استخدم Runway أو Kling. هل لديك مقالة تريد تحويلها؟ استخدم Pictory.</p></div>
-        </div>
-      </div>
-      <div class="tool-card rounded-xl p-6 fade-in border-r-4 border-fuchsia-500">
-        <div class="flex items-start gap-4">
-          <div class="flex-shrink-0 w-8 h-8 rounded-full bg-fuchsia-500/20 flex items-center justify-center text-fuchsia-400 font-bold text-sm">4</div>
-          <div><h3 class="font-semibold text-white mb-2">أضف تعليقاً صوتياً احترافياً</h3><p class="text-indigo-100/70 text-sm">استخدم ElevenLabs لتوليد تعليق صوتي عربي بجودة احترافية. لا تحتاج إلى استوديو تسجيل!</p></div>
-        </div>
-      </div>
-      <div class="tool-card rounded-xl p-6 fade-in border-r-4 border-pink-500">
-        <div class="flex items-start gap-4">
-          <div class="flex-shrink-0 w-8 h-8 rounded-full bg-pink-500/20 flex items-center justify-center text-pink-400 font-bold text-sm">5</div>
-          <div><h3 class="font-semibold text-white mb-2">عدّل واصقل النتيجة</h3><p class="text-indigo-100/70 text-sm">استخدم Descript لتحرير الفيديو والتعليق الصوتي. إذا كانت هناك كلمات غير مناسبة أو مقاطع طويلة، احذفها بسهولة.</p></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- TUTORIAL 2 -->
-<section class="page-section relative px-6 py-20 flex items-center" data-page="tutorial2" id="sec-tutorial2">
-  <div class="max-w-4xl mx-auto w-full">
-    <div class="fade-in mb-10">
-      <div class="mono text-xs tracking-[0.2em] text-indigo-400 mb-3">مقارنة الأدوات</div>
-      <h2 class="text-3xl sm:text-4xl font-bold text-white mb-2">Runway مقابل Kling AI — أيهما تختار؟</h2>
-      <p class="text-indigo-300/70">دليل المقارنة الشامل</p>
-    </div>
-    <div class="grid md:grid-cols-2 gap-6">
-      <div class="tool-card rounded-xl p-6 fade-in border-t-2 border-indigo-500">
-        <h3 class="font-bold text-white mb-4 flex items-center gap-2"><i data-lucide="star" style="width:18px;height:18px;color:#6366f1"></i> Runway Gen-3</h3>
-        <div class="space-y-3 text-sm text-indigo-100/70">
-          <div><span class="text-indigo-400 font-semibold block mb-1">المميزات:</span><ul class="list-disc list-inside space-y-1 text-xs"><li>تحكم كامل في الحركة</li><li>مشاهد معقدة متعددة</li><li>أدوات متقدمة للمحترفين</li><li>تأثيرات بصرية قوية</li></ul></div>
-          <div><span class="text-indigo-400 font-semibold block mb-1">الأفضل لـ:</span><p>صناع الأفلام المحترفين والإعلانات والمشاريع المعقدة</p></div>
-          <div><span class="text-indigo-400 font-semibold block mb-1">السعر:</span><p>خطة مجانية متاحة بميزات محدودة</p></div>
-        </div>
-      </div>
-      <div class="tool-card rounded-xl p-6 fade-in border-t-2 border-purple-500">
-        <h3 class="font-bold text-white mb-4 flex items-center gap-2"><i data-lucide="zap" style="width:18px;height:18px;color:#a78bfa"></i> Kling AI</h3>
-        <div class="space-y-3 text-sm text-indigo-100/70">
-          <div><span class="text-purple-400 font-semibold block mb-1">المميزات:</span><ul class="list-disc list-inside space-y-1 text-xs"><li>محاكاة فيزياء واقعية</li><li>مقاطع أطول (دقيقتان)</li><li>سهل الاستخدام</li><li>سعر أقل</li></ul></div>
-          <div><span class="text-purple-400 font-semibold block mb-1">الأفضل لـ:</span><p>المبتدئين والمحتوى السريع ووسائل التواصل الاجتماعي</p></div>
-          <div><span class="text-purple-400 font-semibold block mb-1">السعر:</span><p>خطة مجانية متاحة بميزات محدودة</p></div>
-        </div>
-      </div>
-    </div>
-    <div class="tool-card rounded-xl p-6 mt-6 fade-in bg-indigo-500/10 border-indigo-500/30">
-      <h3 class="font-semibold text-white mb-3">💡 نصيحة ذهبية</h3>
-      <p class="text-indigo-100/70 text-sm">إذا كنت مبتدئاً أو تريد محتوى سريع لوسائل التواصل، ابدأ بـ <strong class="text-white">Kling AI</strong>. إذا كان لديك مشروع احترافي يتطلب تحكماً دقيقاً، اختر <strong class="text-white">Runway Gen-3</strong>.</p>
-    </div>
-  </div>
-</section>
-
-<!-- TUTORIAL 3 -->
-<section class="page-section relative px-6 py-20 flex items-center" data-page="tutorial3" id="sec-tutorial3">
-  <div class="max-w-4xl mx-auto w-full">
-    <div class="fade-in mb-10">
-      <div class="mono text-xs tracking-[0.2em] text-indigo-400 mb-3">نصائح احترافية</div>
-      <h2 class="text-3xl sm:text-4xl font-bold text-white mb-2">فن كتابة Prompt الاحترافي</h2>
-      <p class="text-indigo-300/70">كيف تحصل على النتائج التي تريدها من الذكاء الاصطناعي</p>
-    </div>
-    <div class="space-y-6">
-      <div class="tool-card rounded-xl p-6 fade-in">
-        <div class="flex items-start gap-4"><span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-indigo-500/20 text-indigo-400 font-bold flex-shrink-0" style="font-size:16px">📋</span>
-          <div><h3 class="font-semibold text-white mb-2">١. حدد الموضوع بوضوح</h3><p class="text-indigo-100/70 text-sm mb-3">صف ما تريد رؤيته بدقة.</p>
-            <div class="bg-indigo-500/10 p-3 rounded border border-indigo-500/30 text-xs text-indigo-200 font-mono">✓ "دراجة نارية حمراء سريعة"<br>✗ "دراجة"</div>
-          </div>
-        </div>
-      </div>
-      <div class="tool-card rounded-xl p-6 fade-in">
-        <div class="flex items-start gap-4"><span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-purple-500/20 text-purple-400 font-bold flex-shrink-0" style="font-size:16px">🎥</span>
-          <div><h3 class="font-semibold text-white mb-2">٢. اذكر زاوية الكاميرا</h3><p class="text-indigo-100/70 text-sm mb-3">حدد من أين تراقب المشهد.</p>
-            <div class="bg-purple-500/10 p-3 rounded border border-purple-500/30 text-xs text-indigo-200 font-mono">✓ "لقطة جوية عريضة لمدينة"<br>✗ "مدينة"</div>
-          </div>
-        </div>
-      </div>
-      <div class="tool-card rounded-xl p-6 fade-in">
-        <div class="flex items-start gap-4"><span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-violet-500/20 text-violet-400 font-bold flex-shrink-0" style="font-size:16px">💡</span>
-          <div><h3 class="font-semibold text-white mb-2">٣. وصف الإضاءة والألوان</h3><p class="text-indigo-100/70 text-sm mb-3">هل هي إضاءة ذهبية دافئة أم بيضاء باردة؟</p>
-            <div class="bg-violet-500/10 p-3 rounded border border-violet-500/30 text-xs text-indigo-200 font-mono">✓ "إضاءة غروب ذهبية، ألوان دافئة"<br>✗ "إضاءة جميلة"</div>
-          </div>
-        </div>
-      </div>
-      <div class="tool-card rounded-xl p-6 fade-in">
-        <div class="flex items-start gap-4"><span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-fuchsia-500/20 text-fuchsia-400 font-bold flex-shrink-0" style="font-size:16px">⚡</span>
-          <div><h3 class="font-semibold text-white mb-2">٤. حدد سرعة الحركة</h3><p class="text-indigo-100/70 text-sm mb-3">بطيء وسلس أم سريع ومتحرك؟</p>
-            <div class="bg-fuchsia-500/10 p-3 rounded border border-fuchsia-500/30 text-xs text-indigo-200 font-mono">✓ "حركة بطيئة سلسة، كاميرا تتحرك للأمام"<br>✗ "حركة"</div>
-          </div>
-        </div>
-      </div>
-      <div class="tool-card rounded-xl p-6 fade-in">
-        <div class="flex items-start gap-4"><span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-pink-500/20 text-pink-400 font-bold flex-shrink-0" style="font-size:16px">🎨</span>
-          <div><h3 class="font-semibold text-white mb-2">٥. حدد الأسلوب البصري</h3><p class="text-indigo-100/70 text-sm mb-3">سينمائي؟ واقعي؟ خيالي؟</p>
-            <div class="bg-pink-500/10 p-3 rounded border border-pink-500/30 text-xs text-indigo-200 font-mono">✓ "أسلوب سينمائي احترافي"<br>✗ "جميل"</div>
-          </div>
-        </div>
-      </div>
-      <div class="tool-card rounded-xl p-6 fade-in bg-indigo-500/10 border-indigo-500/30">
-        <h3 class="font-semibold text-white mb-3">📝 مثال كامل</h3>
-        <p class="text-indigo-200 text-sm font-mono leading-relaxed">"لقطة جوية بطيئة لمدينة مضاءة ليلاً بأضواء ذهبية دافئة، كاميرا تتحرك للأمام ببطء، أسلوب سينمائي احترافي، بدقة 4K، جو هادئ وعميق."</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- QUIZ -->
-<section class="page-section relative px-6 py-20 flex items-center" data-page="quiz" id="sec-quiz">
-  <div class="max-w-4xl mx-auto w-full">
-    <div class="fade-in text-center mb-12">
-      <div class="mono text-xs tracking-[0.2em] text-indigo-400 mb-3">اختبر معلوماتك</div>
-      <h2 class="text-4xl font-bold text-white">اختبر نفسك</h2>
-      <p class="text-indigo-300/70 mt-2">5 أسئلة لاختبار فهمك لأدوات الذكاء الاصطناعي</p>
-    </div>
-    <div class="space-y-6" id="quizContainer"></div>
-    <div class="mt-8 text-center fade-in"><div id="quizScore"></div></div>
-  </div>
-</section>
-
-<!-- RESOURCES -->
-<section class="page-section relative px-6 py-20 flex items-center" data-page="resources" id="sec-resources">
-  <div class="max-w-4xl mx-auto w-full">
-    <div class="fade-in text-center mb-12">
-      <div class="mono text-xs tracking-[0.2em] text-indigo-400 mb-3">المراجع والموارد</div>
-      <h2 class="text-4xl font-bold text-white">الروابط والمصادر المفيدة</h2>
-    </div>
-    <div class="grid md:grid-cols-2 gap-6">
-      <a href="https://runwayml.com" target="_blank" class="tool-card rounded-xl p-6 hover:border-indigo-400/50 transition-all fade-in cursor-pointer">
-        <div class="flex items-start justify-between mb-3"><h3 class="font-semibold text-white">Runway ML</h3><i data-lucide="external-link" style="width:16px;height:16px;color:#6366f1"></i></div>
-        <p class="text-indigo-100/70 text-sm mb-2">منصة متكاملة لتوليد الفيديو من النص والصور بجودة سينمائية</p>
-        <div class="text-xs text-indigo-400 font-mono">runwayml.com</div>
-      </a>
-      <a href="https://www.descript.com" target="_blank" class="tool-card rounded-xl p-6 hover:border-indigo-400/50 transition-all fade-in cursor-pointer">
-        <div class="flex items-start justify-between mb-3"><h3 class="font-semibold text-white">Descript</h3><i data-lucide="external-link" style="width:16px;height:16px;color:#8b5cf6"></i></div>
-        <p class="text-indigo-100/70 text-sm mb-2">تحرير الفيديو والبودكاست بالنص — احذف كلمة وتختفي المقطع</p>
-        <div class="text-xs text-indigo-400 font-mono">descript.com</div>
-      </a>
-      <a href="https://elevenlabs.io" target="_blank" class="tool-card rounded-xl p-6 hover:border-indigo-400/50 transition-all fade-in cursor-pointer">
-        <div class="flex items-start justify-between mb-3"><h3 class="font-semibold text-white">ElevenLabs</h3><i data-lucide="external-link" style="width:16px;height:16px;color:#a78bfa"></i></div>
-        <p class="text-indigo-100/70 text-sm mb-2">توليد أصوات طبيعية واقعية في 30+ لغة بما فيها العربية</p>
-        <div class="text-xs text-indigo-400 font-mono">elevenlabs.io</div>
-      </a>
-      <a href="https://klingai.com" target="_blank" class="tool-card rounded-xl p-6 hover:border-indigo-400/50 transition-all fade-in cursor-pointer">
-        <div class="flex items-start justify-between mb-3"><h3 class="font-semibold text-white">Kling AI</h3><i data-lucide="external-link" style="width:16px;height:16px;color:#c084fc"></i></div>
-        <p class="text-indigo-100/70 text-sm mb-2">توليد فيديو متقدم مع محاكاة فيزياء واقعية وحركة سلسة</p>
-        <div class="text-xs text-indigo-400 font-mono">klingai.com</div>
-      </a>
-      <a href="https://pictory.ai" target="_blank" class="tool-card rounded-xl p-6 hover:border-indigo-400/50 transition-all fade-in cursor-pointer">
-        <div class="flex items-start justify-between mb-3"><h3 class="font-semibold text-white">Pictory AI</h3><i data-lucide="external-link" style="width:16px;height:16px;color:#e879f9"></i></div>
-        <p class="text-indigo-100/70 text-sm mb-2">تحويل المقالات والنصوص إلى فيديوهات احترافية تلقائياً</p>
-        <div class="text-xs text-indigo-400 font-mono">pictory.ai</div>
-      </a>
-      <div class="tool-card rounded-xl p-6 fade-in border-2 border-indigo-500/30">
-        <div class="flex items-start justify-between mb-3"><h3 class="font-semibold text-white">ChatGPT</h3><i data-lucide="sparkles" style="width:16px;height:16px;color:#fbbf24"></i></div>
-        <p class="text-indigo-100/70 text-sm mb-2">مساعد ذكاء اصطناعي لكتابة السيناريوهات والتعليقات الصوتية</p>
-        <div class="text-xs text-indigo-400 font-mono">OpenAI. (2026). ChatGPT. https://chat.openai.com</div>
-      </div>
-    </div>
-    <div class="mt-8 tool-card rounded-xl p-6 fade-in bg-indigo-500/10 border-indigo-500/30">
-      <h3 class="font-semibold text-white mb-3 flex items-center gap-2"><i data-lucide="book" style="width:18px;height:18px;color:#6366f1"></i> نصائح إضافية</h3>
-      <ul class="space-y-2 text-sm text-indigo-100/70">
-        <li>✓ ابدأ بالنسخ المجانية لاختبار الأدوات قبل الدفع</li>
-        <li>✓ شاهد البرامج التعليمية على YouTube لكل أداة</li>
-        <li>✓ جرّب أكثر من أداة واحدة للعثور على المفضلة لديك</li>
-        <li>✓ انضم إلى مجتمعات صُناع الفيديو على Discord و Reddit</li>
-        <li>✓ كن صبوراً — الذكاء الاصطناعي يحتاج إلى وقت للتعلم من تعليماتك</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- CONCLUSION -->
-<section class="page-section relative px-6 py-20 flex items-center" data-page="conclusion" id="sec-conclusion">
-  <div class="max-w-4xl mx-auto w-full text-center fade-in">
-    <div class="mono text-xs tracking-[0.2em] text-indigo-400 mb-3">الخاتمة</div>
-    <h2 class="text-3xl sm:text-5xl font-bold mb-6" style="background:linear-gradient(135deg,#fff,#c7d2fe);-webkit-background-clip:text;-webkit-text-fill-color:transparent">المستقبل ذكي</h2>
-    <p class="text-indigo-100/70 max-w-2xl mx-auto mb-10 leading-relaxed">أدوات الذكاء الاصطناعي لا تحل محل المبدعين — بل تمكّنهم. من خلال أتمتة المهام المتكررة وفتح إمكانيات إبداعية جديدة، تسمح لك هذه الأدوات بالتركيز على ما يهم حقاً: سرد قصتك.</p>
-    <div class="flex flex-wrap justify-center gap-4 mb-12">
-      <button class="btn-primary" onclick="document.getElementById('sec-cover').scrollIntoView({behavior:'smooth'})">
-        <i data-lucide="arrow-up" style="width:16px;height:16px"></i> العودة للأعلى
-      </button>
-    </div>
-    <div class="text-indigo-400/40 text-xs mono">© 2026 المشهد الذكي — مشروع تخرج جامعي</div>
-  </div>
-</section>
+    </section>
 
 </div>
 
 <script>
-const tools = [
-  {
-    id:"runway",num:"02",name:"Runway Gen-3",tagline:"توليد الفيديو من النص والصور",icon:"video",color:"#6366f1",
-    desc:"Runway Gen-3 Alpha نموذج ذكاء اصطناعي متطور يولد مقاطع فيديو عالية الجودة من موجهات نصية أو صور مرجعية. ينتج محتوى سينمائي متسق مع تحكم دقيق في الحركة والأسلوب والتكوين.",
-    features:["توليد فيديو من النص","تحريك الصور","أدوات فرشاة الحركة","أنماط عرض متعددة","تحسين 4K"],
-    advantages:["جودة مخرجات واقعية","توليد سريع (ثوان)","بدون معدات تصوير","واجهة ويب بديهية","مجتمع نشط"],
-    useCase:{title:"تصور مفهوم الفيلم القصير",text:"يستخدم طالب صانع أفلام Runway Gen-3 لتوليد مشاهد مرئية لمشروع تخرجه. بكتابة موجهات وصفية مثل 'لقطة جوية لمدينة مستقبلية عند الغروب'، يولّد مقاطع مرجعية بدون كاميرا أو فريق أو ميزانية."},
-    link:"https://runwayml.com",
-    videoUrl:"https://www.youtube.com/watch?v=GomY9BHqQ7w&t=46s"
-  },
-  {
-    id:"descript",num:"03",name:"Descript",tagline:"تحرير الفيديو كمستند",icon:"file-text",color:"#8b5cf6",
-    desc:"يحول Descript تحرير الفيديو بتحويل اللقطات إلى نصوص قابلة للتحرير. احذف كلمة من النص وتختفي مقطع الفيديو المقابل تلقائياً.",
-    features:["تحرير فيديو نصي","إزالة كلمات التعبئة","تسجيل الشاشة","إضافة عناوين تلقائية","استنساخ الصوت"],
-    advantages:["سهل جداً للتعلم","إزالة المقاطع اليدوية","نشر مدمج","أدوات التعاون","البودكاست والفيديو معاً"],
-    useCase:{title:"تنظيف تسجيل المحاضرة",text:"يسجل أستاذ جامعي محاضرة 60 دقيقة ثم يفتحها في Descript. الذكاء الاصطناعي يكشف كلمات التعبئة ويزيلها بضغطة زر واحدة. الفيديو المصقول ينشر في 10 دقائق."},
-    link:"https://www.descript.com",
-    videoUrl:"https://www.youtube.com/watch?v=i2A7OO0e5zw"
-  },
-  {
-    id:"elevenlabs",num:"04",name:"ElevenLabs",tagline:"توليف الصوت بالذكاء الاصطناعي",icon:"mic",color:"#a78bfa",
-    desc:"توفر ElevenLabs أكثر الأصوات المُولَّدة بالذكاء الاصطناعي واقعية. من الراوي والدبلجة إلى استنساخ الصوت، توفر كلاماً بجودة بشرية في 30+ لغة.",
-    features:["تحويل نص لكلام واقعي","استنساخ الصوت","30+ لغة","التحكم في المشاعر والنبرة","تكامل API"],
-    advantages:["غير مميزة عن البشري","دبلجة متعددة اللغات فوراً","بدون استوديو تسجيل","صوت ثابت للعلامة التجارية","إنتاج صوتي قابل للتوسّع"],
-    useCase:{title:"عرض توضيحي متعدد اللغات",text:"تنشئ شركة ناشئة فيديو بالإنجليزية ثم تستخدم ElevenLabs لتوليد تعليقات صوتية بالعربية والإسبانية واليابانية. النتيجة: أربع فيديوهات محلية في فترة بعد الظهر بدلاً من أسابيع."},
-    link:"https://elevenlabs.io",
-    videoUrl:"https://www.youtube.com/watch?v=ouaWZgEBt_s"
-  },
-  {
-    id:"kling",num:"05",name:"Kling AI",tagline:"توليد فيديو متقدم",icon:"sparkles",color:"#c084fc",
-    desc:"Kling AI تولّد مقاطع فيديو بطول دقيقتين بواقعية فيزيائية ملحوظة. تتفوق في المشاهد المعقدة وفيزياء الحركة الواقعية.",
-    features:["مقاطع فيديو بطول دقيقتين","محاكاة الفيزياء الواقعية","مشاهد بموضوعات متعددة","إدخال نصي وصوري","نقل الحركة"],
-    advantages:["مدة مقطع أطول","جودة حركة أفضل","معالجة المشاهد المعقدة","خطة مجانية متاحة","تحسينات نموذج سريعة"],
-    useCase:{title:"حملة وسائط اجتماعية",text:"تولّد طالبة تسويق مقاطع 30 ثانية لحملة منتجات. باستخدام Kling AI، تنشئ مشاهد احترافية كانت تتطلب استوديو متخصصاً."},
-    link:"https://klingai.com",
-    videoUrl:"https://www.youtube.com/watch?v=mK1ZdZLVreg"
-  },
-  {
-    id:"pictory",num:"06",name:"Pictory",tagline:"تحويل النص إلى فيديو تلقائياً",icon:"layout",color:"#e879f9",
-    desc:"يحول Pictory المقالات والسيناريوهات إلى فيديوهات احترافية تلقائياً. يختار اختيار لقطات جاهزة تلقائياً، يضيف عناوين، ويطبق تخصيص الهوية البصرية.",
-    features:["تحويل المقالة إلى فيديو","اختيار لقطات جاهزة تلقائياً","تخصيص الهوية البصرية","إضافة عناوين تلقائية","إنشاء فيديو بكميات"],
-    advantages:["لا توجد مهارات تحرير مطلوبة","دقائق بدلاً من ساعات","عناوين صديقة لمحركات البحث","إنتاج متسق للعلامة التجارية","إعادة استخدام المحتوى الموجود"],
-    useCase:{title:"تحويل مدونة إلى فيديو",text:"يأخذ طالب تسويق رقمي 10 مقالات ويحولها إلى فيديوهات ملخصة مع عناوين تلقائية وألوان الشركة — مكتبة محتوى كاملة في فترة بعد الظهر."},
-    link:"https://pictory.ai",
-    videoUrl:"https://www.youtube.com/watch?v=Jd9P3fOPdBc"
-  }
-];
+    // بيانات الأدوات المطورة
+    const tools = [
+        {
+            id: "runway", num: "02", name: "Runway Gen-3", tagline: "المخرج السينمائي الرقمي",
+            desc: "نموذج متطور يولد فيديوهات عالية الجودة مع فهم عميق للفيزياء والحركة.",
+            features: ["توليد من النص", "فرشاة الحركة", "دقة 4K"],
+            link: "https://runwayml.com", color: "#6366f1"
+        },
+        {
+            id: "kling", num: "03", name: "Kling AI", tagline: "محاكي الواقع في فيديوهات طويلة",
+            desc: "يتميز بإنتاج مقاطع تصل لدقيقتين مع حركة بشرية طبيعية جداً.",
+            features: ["مقاطع طويلة", "فيزياء واقعية", "استمرارية الشخصيات"],
+            link: "https://klingai.com", color: "#a78bfa"
+        },
+        {
+            id: "descript", num: "04", name: "Descript", tagline: "المونتاج بأسلوب الكتابة",
+            desc: "يجعل تحرير الفيديو سهلاً كتحرير مستند نصي؛ احذف الكلمة يختفي المقطع.",
+            features: ["تحرير نصي", "إزالة التأتأة", "استنساخ الصوت"],
+            link: "https://descript.com", color: "#8b5cf6"
+        }
+    ];
 
-const quizData = [
-  {q:"ما الأداة الأنسب لتحويل مقال نصي إلى فيديو تلقائياً؟",opts:["Runway Gen-3","Pictory","ElevenLabs","Descript"],correct:1,fb:"✓ Pictory متخصصة في تحويل النصوص الطويلة إلى فيديو بشكل تلقائي."},
-  {q:"أي الأدوات تتيح تحرير الفيديو بحذف الكلمات من النص مباشرة؟",opts:["ElevenLabs","Kling AI","Descript","Runway Gen-3"],correct:2,fb:"✓ Descript تحوّل الفيديو إلى نص وتتيح التحرير بالكتابة مباشرة."},
-  {q:"ما الأداة الأفضل لإضافة تعليق صوتي عربي احترافي؟",opts:["Runway Gen-3","Descript","Pictory","ElevenLabs"],correct:3,fb:"✓ ElevenLabs تدعم العربية بجودة عالية وأصوات طبيعية."},
-  {q:"أي من الأدوات تولّد مقاطع فيديو بطول دقيقتين؟",opts:["Runway Gen-3","Pictory","Kling AI","Descript"],correct:2,fb:"✓ Kling AI تتميز بقدرتها على توليد مقاطع بطول دقيقتين."},
-  {q:"ما أهم عنصر في كتابة Prompt احترافي؟",opts:["استخدام كلمات إنجليزية","الوضوح والتفاصيل الدقيقة","الطول والكمية","استخدام رموز تعبيرية"],correct:1,fb:"✓ الوضوح والتفاصيل الدقيقة هما مفتاح الحصول على نتائج احترافية."}
-];
+    // بيانات الاختبار
+    const quizData = [
+        { q: "تريد تحويل مقال صحفي لفيديو سريع لمنصات التواصل، ماذا تختار؟", options: ["Runway", "Pictory", "ElevenLabs"], correct: 1 },
+        { q: "أداة تتيح لك حذف الكلمات من الفيديو بمجرد حذفها من النص؟", options: ["Kling AI", "ElevenLabs", "Descript"], correct: 2 },
+        { q: "أهم عنصر لضمان نجاح مشروعك قبل استخدام الذكاء الاصطناعي؟", options: ["سرعة الإنترنت", "البصمة البشرية والسيناريو", "نوع الجهاز"], correct: 1 }
+    ];
 
-function generateQR() {
-  const p=[];
-  for(let i=0;i<49;i++){const r=Math.floor(i/7),c=i%7;p.push((r<3&&c<3)||(r<3&&c>3)||(r>3&&c<3)||Math.random()>0.5);}
-  return p;
-}
+    // بناء الصفحات
+    function init() {
+        const toolContainer = document.getElementById('toolPages');
+        tools.forEach(tool => {
+            toolContainer.innerHTML += `
+                <section class="page-section flex items-center px-6 py-20" id="sec-${tool.id}">
+                    <div class="max-w-4xl mx-auto w-full">
+                        <div class="fade-in mb-8">
+                            <div class="text-indigo-400 text-sm mb-2">${tool.num} / ${tool.name}</div>
+                            <h2 class="text-5xl font-bold mb-4">${tool.name}</h2>
+                            <p class="text-xl text-indigo-200/70">${tool.tagline}</p>
+                        </div>
+                        <div class="tool-card rounded-2xl p-8 border-r-4" style="border-color:${tool.color}">
+                            <p class="mb-6 leading-relaxed text-indigo-100/80">${tool.desc}</p>
+                            <ul class="flex flex-wrap gap-4 mb-8">
+                                ${tool.features.map(f => `<li class="bg-white/5 px-3 py-1 rounded-full text-xs">• ${f}</li>`).join('')}
+                            </ul>
+                            <a href="${tool.link}" target="_blank" class="btn-primary" style="background:${tool.color}">جربها الآن</a>
+                        </div>
+                    </div>
+                </section>
+            `;
+        });
 
-function buildToolPages() {
-  const container = document.getElementById('toolPages');
-  const qr = generateQR();
-  container.innerHTML = tools.map(tool => `
-    <section class="page-section relative px-6 py-20" data-page="${tool.id}" id="sec-${tool.id}">
-      <div class="max-w-5xl mx-auto w-full">
-        <div class="fade-in">
-          <div class="mono text-xs tracking-[0.2em] mb-3" style="color:${tool.color}">${tool.num} / ${tool.name.toUpperCase()}</div>
-          <div class="flex flex-col md:flex-row md:items-end gap-4 mb-8">
-            <div class="flex-1">
-              <h2 class="text-3xl sm:text-4xl font-bold text-white mb-2">${tool.name}</h2>
-              <p class="text-lg font-light" style="color:${tool.color}">${tool.tagline}</p>
-            </div>
-
-          </div>
-        </div>
-        <div class="grid lg:grid-cols-3 gap-6">
-          <div class="lg:col-span-2 space-y-6">
-            <div class="tool-card rounded-2xl p-6 fade-in">
-              <div class="flex items-center gap-3 mb-4">
-                <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:${tool.color}20">
-                  <i data-lucide="${tool.icon}" style="width:20px;height:20px;color:${tool.color}"></i>
+        const quizContainer = document.getElementById('quizContainer');
+        quizData.forEach((q, idx) => {
+            quizContainer.innerHTML += `
+                <div class="tool-card p-6 rounded-xl fade-in">
+                    <p class="mb-4 font-bold">${idx + 1}. ${q.q}</p>
+                    <div class="grid sm:grid-cols-3 gap-3">
+                        ${q.options.map((opt, oIdx) => `<button class="quiz-btn py-3 rounded-lg text-sm" onclick="checkAnswer(this, ${idx}, ${oIdx})">${opt}</button>`).join('')}
+                    </div>
                 </div>
-                <h3 class="font-semibold text-white">حول الأداة</h3>
-              </div>
-              <p class="text-indigo-100/70 leading-relaxed text-sm">${tool.desc}</p>
-            </div>
-            <div class="grid sm:grid-cols-2 gap-6">
-              <div class="tool-card rounded-2xl p-6 fade-in">
-                <h3 class="font-semibold text-white mb-4 flex items-center gap-2"><i data-lucide="layers" style="width:16px;height:16px;color:${tool.color}"></i> المميزات الرئيسية</h3>
-                <ul class="space-y-2">${tool.features.map(f=>`<li class="flex items-start gap-2 text-sm text-indigo-100/70"><i data-lucide="check-circle" style="width:14px;height:14px;color:${tool.color};margin-top:2px;flex-shrink:0"></i>${f}</li>`).join('')}</ul>
-              </div>
-              <div class="tool-card rounded-2xl p-6 fade-in">
-                <h3 class="font-semibold text-white mb-4 flex items-center gap-2"><i data-lucide="zap" style="width:16px;height:16px;color:${tool.color}"></i> المزايا</h3>
-                <ul class="space-y-2">${tool.advantages.map(a=>`<li class="flex items-start gap-2 text-sm text-indigo-100/70"><i data-lucide="star" style="width:14px;height:14px;color:${tool.color};margin-top:2px;flex-shrink:0"></i>${a}</li>`).join('')}</ul>
-              </div>
-            </div>
-          </div>
-          <div class="space-y-6">
-            <div class="tool-card rounded-2xl p-6 fade-in">
-              <button class="w-full flex items-center justify-between text-right" onclick="this.parentElement.querySelector('.expand-content').classList.toggle('open');this.querySelector('.expand-icon').classList.toggle('rotate-180')">
-                <h3 class="font-semibold text-white flex items-center gap-2"><i data-lucide="lightbulb" style="width:16px;height:16px;color:${tool.color}"></i> حالة الاستخدام</h3>
-                <i data-lucide="chevron-down" class="expand-icon transition-transform" style="width:16px;height:16px;color:${tool.color}"></i>
-              </button>
-              <div class="expand-content open mt-4">
-                <div class="text-sm font-medium text-white mb-2">${tool.useCase.title}</div>
-                <p class="text-xs text-indigo-100/60 leading-relaxed">${tool.useCase.text}</p>
-              </div>
-            </div>
-            <div class="tool-card rounded-2xl p-6 fade-in text-center">
-              <div class="text-xs text-indigo-300/50 mb-3">اضغط هنا للزيارة</div>
-              <div class="qr-box mx-auto">${qr.map(dark=>`<div class="qr-cell ${dark?'qr-dark':'qr-light'}"></div>`).join('')}</div>
-              <a href="${tool.link}" target="_blank" class="text-xs text-indigo-400 font-mono mt-2 block hover:text-indigo-300">${tool.link.replace('https://','')}</a>
-            </div>
-            <div class="tool-card rounded-2xl overflow-hidden fade-in">
-              <div class="aspect-video flex flex-col items-center justify-center gap-3" style="background:linear-gradient(135deg,${tool.color}15,${tool.color}05)">
-                <div class="w-14 h-14 rounded-full flex items-center justify-center cursor-pointer transition-transform hover:scale-110" style="background:${tool.color}30;border:2px solid ${tool.color}50" onclick="window.open('${tool.videoUrl}','_blank')">
-                  <i data-lucide="play" style="width:22px;height:22px;color:${tool.color};margin-left:2px"></i>
-                </div>
-                <span class="text-xs text-indigo-300/50">شاهد العرض التوضيحي</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  `).join('');
-}
+            `;
+        });
 
-function buildQuiz() {
-  const container = document.getElementById('quizContainer');
-  let answered = 0, score = 0;
-  container.innerHTML = quizData.map((q,qi) => `
-    <div class="tool-card rounded-xl p-6 fade-in">
-      <h3 class="font-semibold text-white mb-4">السؤال ${qi+1}: ${q.q}</h3>
-      <div class="space-y-3">
-        ${q.opts.map((opt,oi) => `
-          <button class="quiz-btn w-full text-right p-3 rounded-lg border border-indigo-300/20 hover:bg-indigo-500/10 hover:border-indigo-400/40 transition-all text-indigo-100"
-            onclick="answerQuiz(this,${qi},${oi},${q.correct},'${q.fb.replace(/'/g,"\\'")}')">
-            <span class="font-mono text-xs ml-3">${['أ','ب','ج','د'][oi]})</span> ${opt}
-          </button>`).join('')}
-      </div>
-      <div class="quiz-feedback-${qi} mt-4 text-xs hidden"></div>
-    </div>
-  `).join('');
-}
+        lucide.createIcons();
+        setupObserver();
+    }
 
-let quizScores = {};
-function answerQuiz(btn, qi, oi, correct, fb) {
-  if(quizScores[qi] !== undefined) return;
-  const container = btn.parentElement;
-  container.querySelectorAll('.quiz-btn').forEach(b => b.disabled = true);
-  if(oi === correct) { btn.classList.add('correct'); quizScores[qi] = 1; }
-  else { btn.classList.add('incorrect'); container.querySelectorAll('.quiz-btn')[correct].classList.add('correct'); quizScores[qi] = 0; }
-  const fb_el = document.querySelector(`.quiz-feedback-${qi}`);
-  fb_el.textContent = fb;
-  fb_el.style.color = oi===correct ? 'rgb(134,239,172)' : 'rgb(252,165,165)';
-  fb_el.classList.remove('hidden');
-  if(Object.keys(quizScores).length === quizData.length) {
-    const total = Object.values(quizScores).reduce((a,b)=>a+b,0);
-    const scoreEl = document.getElementById('quizScore');
-    scoreEl.innerHTML = `<div class="tool-card rounded-xl p-6 inline-block"><div class="text-4xl font-bold text-indigo-400 mb-2">${total}/${quizData.length}</div><div class="text-indigo-300/70 text-sm">نتيجتك النهائية</div></div>`;
-  }
-}
+    function checkAnswer(btn, qIdx, oIdx) {
+        const isCorrect = oIdx === quizData[qIdx].correct;
+        btn.classList.add(isCorrect ? 'correct' : 'incorrect');
+        Array.from(btn.parentElement.children).forEach(b => b.disabled = true);
+    }
 
-buildToolPages();
-buildQuiz();
+    function setupObserver() {
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    }
 
-const sections = ['cover','editorial','toc','intro',...tools.map(t=>t.id),'tutorial1','tutorial2','tutorial3','quiz','resources','conclusion'];
-const sideNav = document.getElementById('sideNav');
-sections.forEach(s => {
-  const dot = document.createElement('div');
-  dot.className = 'nav-dot';
-  dot.onclick = () => document.getElementById('sec-'+s).scrollIntoView({behavior:'smooth'});
-  sideNav.appendChild(dot);
-});
-
-const magazine = document.getElementById('magazine');
-magazine.addEventListener('scroll', () => {
-  const st = magazine.scrollTop, sh = magazine.scrollHeight - magazine.clientHeight;
-  document.getElementById('progressBar').style.width = (st/sh*100)+'%';
-  let ai = 0;
-  sections.forEach((s,i) => { const el = document.getElementById('sec-'+s); if(el && el.offsetTop-200 <= st) ai=i; });
-  [...sideNav.children].forEach((d,i) => d.classList.toggle('active', i===ai));
-});
-
-const io = new IntersectionObserver(entries => {
-  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
-}, {threshold:0.15, root:magazine});
-document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
-
-lucide.createIcons();
+    init();
 </script>
 </body>
 </html>
