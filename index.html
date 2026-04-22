@@ -1,254 +1,209 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>المشهد الذكي</title>
-<script src="https://cdn.tailwindcss.com/3.4.17"></script>
-<script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&family=Cairo:wght@400;700&display=swap" rel="stylesheet">
-<style>
-html,body{height:100%;margin:0}
-*{box-sizing:border-box}
-body{font-family:'Cairo',sans-serif}
-.mono{font-family:'Space Mono',monospace}
-.magazine-wrapper{height:100%;overflow-y:auto;overflow-x:hidden;scroll-behavior:smooth;scroll-snap-type:y proximity}
-.page-section{min-height:100%;scroll-snap-align:start}
-.grid-bg{background-image:linear-gradient(rgba(99,102,241,0.08) 1px,transparent 1px),linear-gradient(90deg,rgba(99,102,241,0.08) 1px,transparent 1px);background-size:40px 40px;animation:gridMove 20s linear infinite}
-@keyframes gridMove{0%{background-position:0 0}100%{background-position:40px 40px}}
-.orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:0.4;animation:orbFloat 8s ease-in-out infinite alternate}
-@keyframes orbFloat{0%{transform:translate(0,0) scale(1)}100%{transform:translate(30px,-20px) scale(1.15)}}
-.fade-in{opacity:0;transform:translateY(30px);transition:opacity 0.7s ease,transform 0.7s ease}
-.fade-in.visible{opacity:1;transform:translateY(0)}
-.tool-card{background:rgba(15,15,25,0.7);backdrop-filter:blur(20px);border:1px solid rgba(99,102,241,0.15);transition:all 0.4s cubic-bezier(0.4,0,0.2,1)}
-.tool-card:hover{border-color:rgba(99,102,241,0.5);transform:translateY(-4px);box-shadow:0 20px 60px rgba(99,102,241,0.15)}
-.nav-dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.2);transition:all 0.3s;cursor:pointer}
-.nav-dot.active{background:#818cf8;box-shadow:0 0 12px rgba(129,140,248,0.6);transform:scale(1.3)}
-@keyframes pulse-glow{0%,100%{box-shadow:0 0 20px rgba(99,102,241,0.3)}50%{box-shadow:0 0 40px rgba(99,102,241,0.6)}}
-.expand-content{max-height:0;overflow:hidden;transition:max-height 0.5s ease}
-.expand-content.open{max-height:600px}
-.reading-progress{position:fixed;top:0;right:0;height:3px;z-index:100;background:linear-gradient(90deg,#6366f1,#a78bfa,#c084fc);transition:width 0.15s}
-.btn-primary{background:linear-gradient(135deg,#6366f1,#8b5cf6);color:white;padding:10px 24px;border-radius:10px;font-weight:600;font-size:14px;border:none;cursor:pointer;transition:all 0.3s;display:inline-flex;align-items:center;gap:8px}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(99,102,241,0.4)}
-.btn-ghost{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:#c7d2fe;padding:8px 18px;border-radius:8px;font-size:13px;cursor:pointer;transition:all 0.3s;display:inline-flex;align-items:center;gap:6px}
-.btn-ghost:hover{background:rgba(255,255,255,0.12);border-color:rgba(99,102,241,0.4)}
-.quiz-btn{transition:all 0.3s}
-.quiz-btn.correct{background:rgba(34,197,94,0.1)!important;border-color:rgb(34,197,94)!important;color:rgb(134,239,172)!important}
-.quiz-btn.incorrect{background:rgba(239,68,68,0.1)!important;border-color:rgb(239,68,68)!important;color:rgb(252,165,165)!important}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المشهد الذكي - العدد الكامل</title>
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;700&family=Space+Mono:wght@400;700&family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        html, body { height: 100%; margin: 0; scroll-behavior: smooth; }
+        body { font-family: 'Cairo', sans-serif; background: #08081a; color: white; overflow: hidden; }
+        .mono { font-family: 'Space Mono', monospace; }
+        .magazine-wrapper { height: 100vh; overflow-y: auto; scroll-snap-type: y mandatory; }
+        .page-section { min-height: 100vh; scroll-snap-align: start; position: relative; display: flex; align-items: center; padding: 2rem; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .tool-card { background: rgba(15,15,25,0.7); backdrop-filter: blur(20px); border: 1px solid rgba(99,102,241,0.15); transition: 0.3s; }
+        .nav-dot { width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,0.2); transition: 0.3s; cursor: pointer; border: 2px solid transparent; }
+        .nav-dot.active { background: #818cf8; border-color: white; transform: scale(1.3); }
+        .reading-progress { position: fixed; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #6366f1, #c084fc); z-index: 100; transform-origin: right; }
+        .fade-in { opacity: 0; transform: translateY(20px); transition: 0.6s all ease-out; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+    </style>
 </head>
-<body class="h-full bg-[#08081a] text-white">
+<body>
 
-<div class="reading-progress" id="progressBar" style="width:0%"></div>
-<nav class="fixed left-4 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-3" id="sideNav"></nav>
+<div class="reading-progress" id="progressBar" style="width: 0%"></div>
+<nav class="fixed left-6 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-4" id="sideNav"></nav>
 
 <div class="magazine-wrapper" id="magazine">
-
-<section class="page-section relative flex items-center justify-center grid-bg" data-page="cover" id="sec-cover">
-  <div class="orb" style="width:300px;height:300px;background:#6366f1;top:10%;right:5%"></div>
-  <div class="orb" style="width:250px;height:250px;background:#a78bfa;bottom:15%;left:10%;animation-delay:3s"></div>
-  <div class="orb" style="width:200px;height:200px;background:#c084fc;top:50%;right:60%;animation-delay:5s"></div>
-  <div class="relative z-10 text-center px-6 max-w-3xl fade-in">
-    <div class="mono text-xs tracking-[0.3em] text-indigo-400 mb-6 uppercase">العدد الأول — أبريل 2026</div>
-    <h1 id="coverTitle" class="text-5xl sm:text-7xl font-extrabold leading-tight mb-4" style="background:linear-gradient(135deg,#fff 30%,#a78bfa 70%,#6366f1);-webkit-background-clip:text;-webkit-text-fill-color:transparent">المشهد الذكي</h1>
-    <p id="coverSubtitle" class="text-xl sm:text-2xl font-light text-indigo-200 mb-10">دليلك التفاعلي لأدوات الذكاء الاصطناعي في إنتاج الفيديو</p>
-    <button class="btn-primary text-base" onclick="document.getElementById('sec-editorial').scrollIntoView({behavior:'smooth'})">
-      <i data-lucide="book-open" style="width:18px;height:18px"></i> ابدأ القراءة
-    </button>
-  </div>
-</section>
-
-<section class="page-section relative px-6 py-20 flex items-center" data-page="editorial" id="sec-editorial">
-  <div class="max-w-4xl mx-auto w-full">
-    <div class="fade-in">
-      <div class="mono text-xs tracking-[0.2em] text-indigo-400 mb-3">كلمة المحرر</div>
-      <h2 class="text-4xl font-bold mb-8 text-white">في قلب الثورة الإبداعية</h2>
-    </div>
-    <div class="grid md:grid-cols-2 gap-8">
-      <div class="fade-in space-y-6 text-indigo-100/80 leading-relaxed">
-        <p>نحن لا نقدم مجرد أدوات، بل نرسخ لمفهوم <strong class="text-white">ثراء الوسائط</strong> حيث تلتقي التكنولوجيا بالرؤية البشرية.</p>
-        <p>هذه المجلة هي دليلك لإتقان <strong class="text-white underline decoration-indigo-500">البصمة البشرية</strong> في كل مشهد تنتجه.</p>
-        <p>هدفنا هو تبسيط التقنية، وتمكينك من استخدامها بطريقة عملية وسهلة.</p>
-        <p class="text-indigo-400 font-bold text-lg">— هيا صالح الحظيف</p>
-      </div>
-      <div class="fade-in space-y-4">
-        <div class="tool-card rounded-xl p-6">
-          <h3 class="text-white font-semibold mb-3 flex items-center gap-2"><i data-lucide="trending-up" style="width:18px;height:18px;color:#6366f1"></i> الأرقام تتحدث</h3>
-          <ul class="space-y-3 text-sm text-indigo-100/70">
-            <li class="flex justify-between"><span>وقت الإنتاج المختصر</span><strong class="text-indigo-300">85%</strong></li>
-            <li class="flex justify-between"><span>زيادة الإنتاجية</span><strong class="text-indigo-300">10x</strong></li>
-            <li class="flex justify-between"><span>تكلفة أقل</span><strong class="text-indigo-300">90%</strong></li>
-          </ul>
+    <section class="page-section justify-center text-center" id="sec-cover">
+        <div class="max-w-3xl fade-in">
+            <span class="mono text-indigo-400 tracking-widest">إصدار أبريل 2026</span>
+            <h1 class="text-7xl font-black mt-4 mb-6 bg-gradient-to-r from-white to-indigo-400 bg-clip-text text-transparent">المشهد الذكي</h1>
+            <p class="text-xl text-indigo-200/80 mb-8">رحلة تفاعلية في عالم توليد الفيديو بالذكاء الاصطناعي</p>
+            <button onclick="scrollToPage('sec-editorial')" class="bg-indigo-600 px-8 py-3 rounded-full font-bold hover:bg-indigo-500 transition">ابدأ التجربة</button>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<section class="page-section relative px-6 py-20 flex items-center" data-page="toc" id="sec-toc">
-  <div class="max-w-4xl mx-auto w-full">
-    <div class="fade-in text-center mb-12">
-      <div class="mono text-xs tracking-[0.2em] text-indigo-400 mb-3">الفهرس</div>
-      <h2 class="text-4xl font-bold text-white">داخل هذا العدد</h2>
-    </div>
-    <div class="grid md:grid-cols-2 gap-4">
-      <button class="tool-card rounded-xl p-5 text-right hover:border-indigo-400/50 transition-all fade-in" onclick="document.getElementById('sec-intro').scrollIntoView({behavior:'smooth'})">
-        <div class="flex items-start justify-between">
-          <i data-lucide="arrow-right" style="width:16px;height:16px;color:#6366f1;flex-shrink:0;margin-top:2px"></i>
-          <div><div class="mono text-xs text-indigo-400 mb-2">المقدمة</div><h3 class="font-semibold text-white">الذكاء الاصطناعي يعيد تشكيل الفيديو</h3></div>
+    <section class="page-section" id="sec-editorial">
+        <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-12 fade-in">
+            <div>
+                <h2 class="text-4xl font-bold mb-6 italic">"المستقبل يُكتب بالبكسل.."</h2>
+                <p class="text-indigo-100/70 leading-relaxed mb-4">أهلاً بك في العدد الأول. لم يعد إنتاج الفيديو حكراً على الاستوديوهات الكبرى؛ اليوم، خيالك هو المخرج والذكاء الاصطناعي هو طاقم العمل.</p>
+                <p class="font-bold text-indigo-400">— هيا صالح الحضيف</p>
+            </div>
+            <div class="tool-card p-6 rounded-2xl border-indigo-500/30">
+                <h3 class="font-bold mb-4">إحصائيات تهمك:</h3>
+                <div class="space-y-4">
+                    <div class="flex justify-between border-b border-white/10 pb-2"><span>نمو محتوى الـ AI</span><span class="text-indigo-400">+300%</span></div>
+                    <div class="flex justify-between border-b border-white/10 pb-2"><span>سرعة المونتاج</span><span class="text-indigo-400">8x أسرع</span></div>
+                </div>
+            </div>
         </div>
-      </button>
-      </div>
-  </div>
-</section>
+    </section>
 
-<section class="page-section relative px-6 py-20 flex items-center" data-page="intro" id="sec-intro">
-  <div class="max-w-4xl mx-auto w-full">
-    <div class="fade-in">
-      <div class="mono text-xs tracking-[0.2em] text-indigo-400 mb-3">01 / المقدمة</div>
-      <h2 class="text-3xl sm:text-5xl font-bold mb-8" style="background:linear-gradient(135deg,#fff,#c7d2fe);-webkit-background-clip:text;-webkit-text-fill-color:transparent">الذكاء الاصطناعي يعيد تشكيل إنتاج الفيديو</h2>
-    </div>
-  </div>
-</section>
+    <div id="toolPages"></div>
 
-<div id="toolPages"></div>
+    <section class="page-section" id="sec-tutorials">
+        <div class="max-w-5xl mx-auto w-full fade-in">
+            <h2 class="text-4xl font-bold mb-10 text-center">دروس تعليمية: من الفكرة للمشهد</h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="tool-card p-6 rounded-xl">
+                    <div class="text-indigo-400 font-bold mb-2">01</div>
+                    <h3 class="font-bold mb-3">هندسة الأوامر (Prompting)</h3>
+                    <p class="text-sm text-indigo-100/60">تعلم كيف تكتب وصفاً دقيقاً يفهمه Runway ليعطيك نتائج سينمائية.</p>
+                </div>
+                <div class="tool-card p-6 rounded-xl">
+                    <div class="text-indigo-400 font-bold mb-2">02</div>
+                    <h3 class="font-bold mb-3">تناسق الهوية البصرية</h3>
+                    <p class="text-sm text-indigo-100/60">طرق توحيد الشخصيات والألوان في المقاطع المولدة بالذكاء الاصطناعي.</p>
+                </div>
+                <div class="tool-card p-6 rounded-xl">
+                    <div class="text-indigo-400 font-bold mb-2">03</div>
+                    <h3 class="font-bold mb-3">تكامل الأدوات</h3>
+                    <p class="text-sm text-indigo-100/60">كيف تدمج ElevenLabs مع Kling AI لتصنع فيلماً قصيراً متكاملاً.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<div id="tutorialSections">
-    </div>
+    <section class="page-section" id="sec-quiz">
+        <div class="max-w-2xl mx-auto w-full text-center fade-in">
+            <h2 class="text-4xl font-bold mb-8">اختبر معلوماتك الرقمية</h2>
+            <div id="quizContainer" class="tool-card p-10 rounded-3xl">
+                <p id="quizQuestion" class="text-xl mb-6 font-semibold"></p>
+                <div id="quizOptions" class="grid gap-4"></div>
+            </div>
+        </div>
+    </section>
 
-<div id="finalSections">
-    </div>
-
+    <section class="page-section justify-center text-center" id="sec-final">
+        <div class="max-w-2xl fade-in">
+            <h2 class="text-5xl font-bold mb-6 italic text-indigo-300">كن جزءاً من المستقبل</h2>
+            <p class="text-indigo-100/70 mb-8 leading-loose">شكراً لرحلتك معنا في هذا العدد. تذكر أن الأداة ليست هي المبدعة، بل أنت من يوجهها.</p>
+            <div class="flex justify-center gap-6">
+                <div class="text-center"><div class="font-bold">2026</div><div class="text-xs text-indigo-400">حقوق النشر</div></div>
+                <div class="h-10 w-[1px] bg-white/20"></div>
+                <div class="text-center"><div class="font-bold">هيا صالح</div><div class="text-xs text-indigo-400">إعداد</div></div>
+            </div>
+        </div>
+    </section>
 </div>
 
 <script>
+// 1. الأدوات (تم دمج الكل)
 const tools = [
-  {
-    id:"runway",num:"02",name:"Runway Gen-3",tagline:"توليد الفيديو من النص والصور",icon:"video",color:"#6366f1",
-    desc:"نموذج ذكاء اصطناعي متطور يولد مقاطع فيديو عالية الجودة. في هذا النموذج، قمنا بتحويل صورة ثابتة لمترو الرياض إلى لقطة سينمائية متحركة.",
-    features:["تحريك الصور بدقة عالية","توليد فيديو من النص","أدوات فرشاة الحركة (Motion Brush)","تحسين الجودة لـ 4K"],
-    advantages:["توفير تكاليف التصوير الجوي","سرعة الإنتاج (دقائق بدل أيام)","إنتاج محتوى حصري وفريد"],
-    customDemo: `
-      <div class="mt-8 grid md:grid-cols-2 gap-6 items-center">
-          <div class="tool-card p-4 text-center rounded-xl bg-white/5 border border-white/10">
-              <p class="text-[10px] mono text-indigo-400 mb-3 uppercase tracking-widest">المدخلات: صورة ثابتة (قبل)</p>
-              <img src="riyadh-metro-photo.jpg" alt="صورة مترو الرياض الأصلية" class="rounded-lg w-full aspect-video object-cover shadow-2xl">
-          </div>
-          <div class="tool-card p-4 text-center rounded-xl bg-indigo-500/10 border border-indigo-500/40">
-              <p class="text-[10px] mono text-indigo-400 mb-3 uppercase tracking-widest">المخرجات: فيديو ذكي (بعد)</p>
-              <div class="rounded-lg overflow-hidden shadow-2xl border border-indigo-500/20">
-                  <video controls class="w-full aspect-video bg-black">
-                      <source src="metro-kafd.mp4" type="video/mp4">
-                  </video>
-              </div>
-          </div>
-      </div>
-    `,
-    useCase:{title:"إنتاج لقطات جوية حصرية",text:"بدلاً من استئجار طائرة درون وتصوير المترو، قام المحرر باستخدام صورة فوتوغرافية وتحويلها إلى فيديو سينمائي بـ (هندسة الأوامر)."},
-    link:"https://runwayml.com",
-    videoUrl:"https://www.youtube.com/watch?v=GomY9BHqQ7w"
-  },
-  {
-    id:"descript",num:"03",name:"Descript",tagline:"تحرير الفيديو كمستند",icon:"file-text",color:"#8b5cf6",
-    desc:"يحول Descript تحرير الفيديو بتحويل اللقطات إلى نصوص قابلة للتحرير. احذف كلمة من النص وتختفي مقطع الفيديو المقابل تلقائياً.",
-    features:["تحرير فيديو نصي","إزالة كلمات التعبئة","تسجيل الشاشة","استنساخ الصوت"],
-    advantages:["سهل جداً للتعلم","إزالة المقاطع اليدوية","أدوات التعاون"],
-    useCase:{title:"تنظيف تسجيل المحاضرة",text:"يسجل أستاذ جامعي محاضرة 60 دقيقة ثم يفتحها في Descript ليزيل التوقفات وكلمات 'آآه' بضغطة زر."},
-    link:"https://www.descript.com",
-    videoUrl:"https://www.youtube.com/watch?v=i2A7OO0e5zw"
-  },
-  {
-    id:"elevenlabs",num:"04",name:"ElevenLabs",tagline:"توليف الصوت بالذكاء الاصطناعي",icon:"mic",color:"#a78bfa",
-    desc:"توفر ElevenLabs أكثر الأصوات المُولَّدة بالذكاء الاصطناعي واقعية في 30+ لغة بما فيها العربية.",
-    features:["تحويل نص لكلام واقعي","استنساخ الصوت","التحكم في المشاعر"],
-    advantages:["غير مميزة عن البشري","دبلجة متعددة اللغات","بدون استوديو تسجيل"],
-    customDemo: `
-      <div class="mt-6 p-4 tool-card rounded-xl border-indigo-500/30 bg-indigo-500/5">
-          <p class="text-[10px] mono text-indigo-400 mb-2 uppercase tracking-widest text-center">تجربة صوتية: ElevenLabs</p>
-          <audio controls class="w-full h-8"><source src="voice.mp3" type="audio/mpeg"></audio>
-      </div>
-    `,
-    useCase:{title:"دبلجة المحتوى التعليمي",text:"تحويل فيديو تعليمي من الإنجليزية إلى العربية بنفس نبرة صوت المحاضر الأصلي."},
-    link:"https://elevenlabs.io",
-    videoUrl:"https://www.youtube.com/watch?v=GomY9BHqQ7w"
-  },
-  {
-    id:"kling",num:"05",name:"Kling AI",tagline:"محاكاة فيزياء العالم الحقيقي",icon:"zap",color:"#c084fc",
-    desc:"أداة Kling AI تتميز بقدرتها الفائقة على محاكاة الحركة الطبيعية والفيزياء الواقعية في الفيديو لفترات زمنية طويلة تصل لـ دقيقتين.",
-    features:["مقاطع طويلة بجودة عالية","محاكاة فيزياء معقدة","حركة ذراع بشرية دقيقة"],
-    advantages:["واقعية مذهلة","إنتاج مشاهد سينمائية","دعم اللقطات الطويلة"],
-    useCase:{title:"صناعة أفلام قصيرة",text:"استخدام Kling لإنتاج مشهد لشخص يمشي في مطر واقعي مع انعكاسات دقيقة على الأرض دون الحاجة لتصوير حقيقي."},
-    link:"https://klingai.com",
-    videoUrl:"https://www.youtube.com/watch?v=kling-demo"
-  },
-  {
-    id:"pictory",num:"06",name:"Pictory AI",tagline:"تحويل النص إلى فيديو في ثوانٍ",icon:"layout",color:"#e879f9",
-    desc:"منصة مثالية لتحويل المقالات الصحفية والمدونات إلى فيديوهات قصيرة جاهزة للنشر على وسائل التواصل الاجتماعي تلقائياً.",
-    features:["تحويل المقال لفيديو","توليد ترجمة نصية تلقائية","مكتبة ضخمة من المقاطع"],
-    advantages:["توفير الوقت في المونتاج","تحويل المحتوى المكتوب لمرئي","سهولة التعديل"],
-    useCase:{title:"إعادة تدوير المحتوى",text:"صحيفة تأخذ أهم الأخبار المكتوبة وتحولها عبر Pictory إلى فيديوهات Reels و TikTok لزيادة التفاعل."},
-    link:"https://pictory.ai",
-    videoUrl:"https://www.youtube.com/watch?v=pictory-demo"
-  }
+    { id: "runway", name: "Runway Gen-3", icon: "video", color: "#6366f1", desc: "ملك التوليد السينمائي وتحريك الصور." },
+    { id: "descript", name: "Descript", icon: "file-text", color: "#8b5cf6", desc: "تعديل الفيديو بسهولة تحرير ملف Word." },
+    { id: "eleven", name: "ElevenLabs", icon: "mic", color: "#a78bfa", desc: "الأصوات الأكثر واقعية في العالم." },
+    { id: "kling", name: "Kling AI", icon: "zap", color: "#c084fc", desc: "محاكاة مذهلة لفيزياء العالم الحقيقي." },
+    { id: "pictory", name: "Pictory", icon: "layout", color: "#e879f9", desc: "تحويل المقالات المكتوبة لفيديوهات في دقائق." }
 ];
 
-// دالة العرض والتنقل تبقى كما هي في الكود السابق لضمان استمرارية العمل
-function renderTools() {
-  const container = document.getElementById('toolPages');
-  container.innerHTML = tools.map(tool => `
-    <section class="page-section relative px-6 py-20 flex items-center border-t border-white/5" data-page="${tool.id}" id="sec-${tool.id}">
-      <div class="max-w-5xl mx-auto w-full">
-        <div class="fade-in mb-8">
-          <div class="mono text-xs tracking-[0.2em] text-indigo-400 mb-3">${tool.num} / الأداة</div>
-          <div class="flex items-center gap-4 mb-4">
-             <div class="p-3 rounded-2xl" style="background:${tool.color}20"><i data-lucide="${tool.icon}" style="color:${tool.color};width:32px;height:32px"></i></div>
-             <h2 class="text-3xl sm:text-5xl font-bold text-white">${tool.name}</h2>
-          </div>
-          <p class="text-xl text-indigo-300 font-light">${tool.tagline}</p>
-        </div>
-        <div class="grid lg:grid-cols-2 gap-12 items-start">
-          <div class="fade-in space-y-6">
-            <p class="text-indigo-100/80 leading-relaxed text-lg">${tool.desc}</p>
-            <div class="grid grid-cols-2 gap-4">
-              <div class="tool-card p-5 rounded-2xl">
-                <h4 class="text-white font-bold mb-3 text-sm">المميزات</h4>
-                <ul class="space-y-2 text-xs text-indigo-200/60">
-                  ${tool.features.map(f => `<li class="flex items-center gap-2"><i data-lucide="check-circle-2" style="width:14px;height:14px;color:${tool.color}"></i>${f}</li>`).join('')}
-                </ul>
-              </div>
-              <div class="tool-card p-5 rounded-2xl">
-                <h4 class="text-white font-bold mb-3 text-sm">الفوائد</h4>
-                <ul class="space-y-2 text-xs text-indigo-200/60">
-                  ${tool.advantages.map(a => `<li class="flex items-center gap-2"><i data-lucide="zap" style="width:14px;height:14px;color:${tool.color}"></i>${a}</li>`).join('')}
-                </ul>
-              </div>
-            </div>
-            ${tool.customDemo ? tool.customDemo : ''}
-            <div class="flex gap-4 pt-4">
-              <a href="${tool.link}" target="_blank" class="btn-primary" style="background:linear-gradient(135deg,${tool.color},#000)">جرب الأداة</a>
-            </div>
-          </div>
-          <div class="fade-in">
-            <div class="tool-card p-8 rounded-3xl border-2" style="border-color:${tool.color}30">
-               <h4 class="text-lg font-semibold text-white mb-3">مثال تطبيقي</h4>
-               <p class="text-indigo-100/70 leading-relaxed">${tool.useCase.text}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  `).join('');
-  lucide.createIcons();
+// 2. بيانات الاختبار
+const quizData = [
+    { q: "أي أداة تُستخدم أساساً لتحويل النص المكتوب إلى فيديو تواصل اجتماعي تلقائياً؟", a: ["Runway", "Pictory", "Descript"], correct: 1 },
+    { q: "ما هي ميزة 'Edit by Script' في Descript؟", a: ["تعديل الفيديو عبر تعديل النص", "تلوين الفيديو", "تغيير سرعة الصوت"], correct: 0 }
+];
+
+let currentQuiz = 0;
+
+// 3. الدوال الوظيفية
+function init() {
+    renderTools();
+    renderNav();
+    initQuiz();
+    lucide.createIcons();
+    
+    // مراقبة التمرير لشريط التقدم والنقاط
+    document.getElementById('magazine').addEventListener('scroll', handleScroll);
 }
 
-// تشغيل الوظائف عند التحميل
-window.onload = () => {
-  renderTools();
-  // بقية دوال التهيئة...
-  if (typeof initQuiz === 'function') initQuiz();
-  if (typeof updateNav === 'function') updateNav();
-  if (typeof initScroll === 'function') initScroll();
-};
+function renderTools() {
+    const container = document.getElementById('toolPages');
+    container.innerHTML = tools.map(t => `
+        <section class="page-section" id="sec-${t.id}">
+            <div class="max-w-5xl mx-auto w-full grid md:grid-cols-2 gap-10 items-center fade-in">
+                <div>
+                    <div class="p-4 inline-block rounded-2xl mb-4" style="background:${t.color}20">
+                        <i data-lucide="${t.icon}" style="color:${t.color}"></i>
+                    </div>
+                    <h2 class="text-5xl font-bold mb-4">${t.name}</h2>
+                    <p class="text-lg text-indigo-100/70 mb-6">${t.desc}</p>
+                    <button class="border-2 border-indigo-400 px-6 py-2 rounded-xl hover:bg-indigo-400/10 transition">قراءة الدليل الكامل</button>
+                </div>
+                <div class="tool-card aspect-video rounded-3xl flex items-center justify-center border-dashed">
+                    <span class="text-indigo-400 mono opacity-40">[معاينة الأداة التفاعلية]</span>
+                </div>
+            </div>
+        </section>
+    `).join('');
+}
+
+function renderNav() {
+    const nav = document.getElementById('sideNav');
+    const sections = ['cover', 'editorial', ...tools.map(t => t.id), 'tutorials', 'quiz', 'final'];
+    nav.innerHTML = sections.map(s => `<div class="nav-dot" id="dot-sec-${s}" onclick="scrollToPage('sec-${s}')"></div>`).join('');
+}
+
+function scrollToPage(id) {
+    document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+}
+
+function handleScroll() {
+    const container = document.getElementById('magazine');
+    const scrollPos = container.scrollTop;
+    const totalHeight = container.scrollHeight - container.clientHeight;
+    
+    // تحريك شريط التقدم
+    document.getElementById('progressBar').style.width = (scrollPos / totalHeight * 100) + '%';
+
+    // تحديث النقاط الجانبية وتأثير الظهور
+    const sections = document.querySelectorAll('.page-section');
+    sections.forEach(sec => {
+        const rect = sec.getBoundingClientRect();
+        if(rect.top >= -200 && rect.top <= 200) {
+            // تحديث النقطة
+            document.querySelectorAll('.nav-dot').forEach(d => d.classList.remove('active'));
+            const dot = document.getElementById(`dot-${sec.id}`);
+            if(dot) dot.classList.add('active');
+            
+            // تفعيل تأثير الظهور
+            sec.querySelectorAll('.fade-in').forEach(f => f.classList.add('visible'));
+        }
+    });
+}
+
+function initQuiz() {
+    const q = quizData[currentQuiz];
+    document.getElementById('quizQuestion').innerText = q.q;
+    document.getElementById('quizOptions').innerHTML = q.a.map((opt, i) => `
+        <button onclick="checkAnswer(${i})" class="w-full p-4 rounded-xl border border-white/10 hover:bg-white/5 transition text-right">${opt}</button>
+    `).join('');
+}
+
+function checkAnswer(idx) {
+    if(idx === quizData[currentQuiz].correct) {
+        alert("إجابة صحيحة!");
+        currentQuiz = (currentQuiz + 1) % quizData.length;
+        initQuiz();
+    } else {
+        alert("حاول مرة أخرى");
+    }
+}
+
+window.onload = init;
 </script>
 </body>
 </html>
