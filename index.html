@@ -153,13 +153,9 @@ h2.ttitle{font-size:clamp(1.5rem,3.8vw,2.5rem);font-weight:800;line-height:1.18;
     <div class="label mb-5">العدد الأول — أبريل 2026</div>
     <h1 class="hero mb-3" style="color:#f1f5f9">المشهد الذكي</h1>
     <p class="text-base mb-8" style="color:#cbd5e1">دليلك التفاعلي لأدوات الذكاء الاصطناعي في إنتاج الفيديو</p>
-    <button class="btn btn-p" onclick="scrollTo('sec-editorial')">
-      <i data-lucide="mouse-pointer-2" style="width:16px;height:16px"></i> مرر لاستكشاف
+    <button class="btn btn-p" onclick="document.getElementById('sec-editorial').scrollIntoView({behavior:'smooth'})">
+      <i data-lucide="chevrons-down" style="width:16px;height:16px"></i> مرر لاستكشاف
     </button>
-    <div class="mt-8 flex items-center justify-center gap-2 text-sm" style="color:#475569">
-      <i data-lucide="chevrons-down" style="width:14px;height:14px" class="animate-bounce"></i>
-      مرر للاستكشاف
-    </div>
   </div>
 </section>
 
@@ -172,70 +168,74 @@ h2.ttitle{font-size:clamp(1.5rem,3.8vw,2.5rem);font-weight:800;line-height:1.18;
       <div class="label mb-2">كلمة المحرر</div>
       <h2 class="stitle">في قلب الثورة الإبداعية</h2>
     </div>
-    <div class="grid md:grid-cols-2 gap-8">
-      <div class="fi space-y-4 body-text">
+    <div class="grid md:grid-cols-1 gap-8">
+      <div class="fi space-y-4 body-text" style="max-width:60ch">
         <p>في عصر تتسارع فيه وتيرة التطور التقني، لم يعد إنتاج الفيديو الاحترافي حكراً على المختصين، بل أصبح متاحاً للجميع بفضل أدوات الذكاء الاصطناعي.</p>
         <p>تقدم لك هذه المجلة دليلاً عملياً للتعرف على أهم الأدوات التي تساعدك في إنتاج محتوى مرئي احترافي بسهولة.</p>
         <p>هدفنا هو تبسيط التقنية وتمكينك من استخدامها بطريقة واضحة وعملية، سواء كنت مبتدئاً أو تسعى لتطوير مهاراتك في صناعة المحتوى.</p>
       </div>
-      <div class="fi space-y-3">
-        <!-- Stats Card — visual upgrade -->
-        <div class="card card-accent" style="border-right-color:var(--indigo)">
-          <h3 style="color:var(--text);font-weight:600;font-size:14px;margin-bottom:6px;display:flex;align-items:center;gap:8px">
-            <i data-lucide="bar-chart-2" style="width:15px;height:15px;color:var(--indigo)"></i> الأرقام تتحدث
-          </h3>
-          <p style="font-size:12px;color:var(--text-muted);margin-bottom:14px;line-height:1.6">تعكس هذه الأرقام التأثير الكبير الذي أحدثته أدوات الذكاء الاصطناعي في تسريع وتحسين عملية إنتاج الفيديو.</p>
+    </div>
+  </div>
+</section>
 
-          <!-- 85% -->
-          <div style="margin-bottom:12px">
-            <div style="display:flex;justify-content:space-between;margin-bottom:4px">
-              <span style="font-size:12px;color:var(--text-sec)">وقت الإنتاج المختصر</span>
-              <strong style="font-size:12px;color:var(--indigo-lt)">85%</strong>
-            </div>
-            <div style="background:rgba(99,102,241,0.12);border-radius:4px;height:5px">
-              <div style="background:var(--indigo-lt);border-radius:4px;height:5px;width:85%"></div>
-            </div>
-            <p style="font-size:11px;color:var(--text-muted);margin:4px 0 0">تقليل الوقت اللازم للإنتاج بنسبة تصل إلى 85% مقارنة بالطرق التقليدية.</p>
-          </div>
+<!-- ════════════════════════════════════════════════════
+     STATS — الأرقام تتحدث
+════════════════════════════════════════════════════ -->
+<section class="sec" data-page="stats" id="sec-stats">
+  <div class="wrap">
+    <div class="fi mb-8">
+      <div class="label mb-2">إحصائيات</div>
+      <h2 class="stitle">الأرقام تتحدث</h2>
+      <p class="muted" style="font-size:13px;margin-top:4px">تعكس هذه الأرقام التأثير الكبير الذي أحدثته أدوات الذكاء الاصطناعي في تسريع وتحسين عملية إنتاج الفيديو.</p>
+    </div>
+    <div class="fi" style="max-width:520px">
+      <!-- 85% -->
+      <div style="margin-bottom:18px">
+        <div style="display:flex;justify-content:space-between;margin-bottom:5px">
+          <span style="font-size:13px;color:var(--text-sec)">وقت الإنتاج المختصر</span>
+          <strong style="font-size:13px;color:var(--indigo-lt)">85%</strong>
+        </div>
+        <div style="background:rgba(99,102,241,0.12);border-radius:4px;height:6px">
+          <div style="background:var(--indigo-lt);border-radius:4px;height:6px;width:85%"></div>
+        </div>
+        <p style="font-size:12px;color:var(--text-muted);margin:5px 0 0">تقليل الوقت اللازم للإنتاج بنسبة تصل إلى 85% مقارنة بالطرق التقليدية.</p>
+      </div>
 
-          <!-- 10x -->
-          <div style="margin-bottom:12px;display:flex;align-items:center;gap:10px">
-            <div style="flex-shrink:0;width:38px;height:38px;border-radius:8px;background:rgba(99,102,241,0.12);display:flex;align-items:center;justify-content:center">
-              <i data-lucide="zap" style="width:17px;height:17px;color:var(--indigo-lt)"></i>
-            </div>
-            <div>
-              <div style="font-size:1.1rem;font-weight:800;color:var(--indigo-lt);line-height:1">10x</div>
-              <p style="font-size:11px;color:var(--text-muted);margin:3px 0 0">تمكّن هذه الأدوات المستخدم من إنتاج محتوى بمعدل يصل إلى 10 أضعاف.</p>
-            </div>
-          </div>
+      <!-- 90% -->
+      <div style="margin-bottom:18px">
+        <div style="display:flex;justify-content:space-between;margin-bottom:5px">
+          <span style="font-size:13px;color:var(--text-sec)">انخفاض تكاليف الإنتاج</span>
+          <strong style="font-size:13px;color:var(--indigo-lt)">90%</strong>
+        </div>
+        <div style="background:rgba(99,102,241,0.12);border-radius:4px;height:6px">
+          <div style="background:var(--indigo-lt);border-radius:4px;height:6px;width:90%"></div>
+        </div>
+        <p style="font-size:12px;color:var(--text-muted);margin:5px 0 0">انخفاض تكاليف الإنتاج بنسبة تصل إلى 90% بفضل الاعتماد على الأدوات الذكية.</p>
+      </div>
 
-          <!-- 90% -->
-          <div style="margin-bottom:12px">
-            <div style="display:flex;justify-content:space-between;margin-bottom:4px">
-              <span style="font-size:12px;color:var(--text-sec)">تكلفة أقل</span>
-              <strong style="font-size:12px;color:var(--indigo-lt)">90%</strong>
-            </div>
-            <div style="background:rgba(99,102,241,0.12);border-radius:4px;height:5px">
-              <div style="background:var(--indigo-lt);border-radius:4px;height:5px;width:90%"></div>
-            </div>
-            <p style="font-size:11px;color:var(--text-muted);margin:4px 0 0">انخفاض تكاليف الإنتاج بنسبة تصل إلى 90% بفضل الاعتماد على الأدوات الذكية.</p>
-          </div>
+      <!-- 10x -->
+      <div style="margin-bottom:18px;display:flex;align-items:center;gap:14px;padding:14px;background:rgba(99,102,241,0.06);border-radius:10px;border:1px solid rgba(99,102,241,0.18)">
+        <div style="flex-shrink:0;width:44px;height:44px;border-radius:10px;background:rgba(99,102,241,0.14);display:flex;align-items:center;justify-content:center">
+          <i data-lucide="zap" style="width:20px;height:20px;color:var(--indigo-lt)"></i>
+        </div>
+        <div>
+          <div style="font-size:1.3rem;font-weight:800;color:var(--indigo-lt);line-height:1.1">10x</div>
+          <p style="font-size:12px;color:var(--text-muted);margin:4px 0 0">زيادة الإنتاجية — تمكّن هذه الأدوات المستخدم من إنتاج محتوى بمعدل يصل إلى 10 أضعاف.</p>
+        </div>
+      </div>
 
-          <!-- Free badge -->
-          <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:rgba(99,102,241,0.08);border-radius:8px;border:1px solid rgba(99,102,241,0.2)">
-            <div style="width:28px;height:28px;border-radius:6px;background:rgba(99,102,241,0.18);display:flex;align-items:center;justify-content:center;flex-shrink:0">
-              <i data-lucide="check-circle" style="width:15px;height:15px;color:var(--indigo-lt)"></i>
-            </div>
-            <div>
-              <div style="font-size:12px;font-weight:600;color:var(--text)">أدوات مجانية متاحة</div>
-              <p style="font-size:11px;color:var(--text-muted);margin:2px 0 0">توفر العديد من هذه الأدوات نسخاً مجانية تتيح للمستخدمين البدء دون تكلفة.</p>
-            </div>
-          </div>
+      <!-- Free badge -->
+      <div style="display:flex;align-items:center;gap:14px;padding:14px;background:rgba(99,102,241,0.06);border-radius:10px;border:1px solid rgba(99,102,241,0.18)">
+        <div style="flex-shrink:0;width:44px;height:44px;border-radius:10px;background:rgba(99,102,241,0.14);display:flex;align-items:center;justify-content:center">
+          <i data-lucide="wallet" style="width:20px;height:20px;color:var(--indigo-lt)"></i>
+        </div>
+        <div>
+          <div style="font-size:13px;font-weight:700;color:var(--text)">أدوات مجانية متاحة</div>
+          <p style="font-size:12px;color:var(--text-muted);margin:4px 0 0">توفر العديد من هذه الأدوات نسخاً مجانية تتيح للمستخدمين البدء دون تكلفة.</p>
         </div>
       </div>
     </div>
   </div>
-</section>
 
 <!-- ════════════════════════════════════════════════════
      TOC
@@ -263,12 +263,6 @@ h2.ttitle{font-size:clamp(1.5rem,3.8vw,2.5rem);font-weight:800;line-height:1.18;
       <p>يشهد عالم إنتاج المحتوى الرقمي تطوراً متسارعاً بفضل تقنيات الذكاء الاصطناعي، التي أحدثت نقلة نوعية في طريقة إنشاء الفيديوهات ومعالجتها.</p>
       <p>لم يعد إنتاج محتوى مرئي احترافي يتطلب خبرة تقنية معقدة، بل أصبح في متناول الجميع من خلال أدوات ذكية تسهّل مختلف مراحل العمل، من كتابة الفكرة وحتى إخراج الفيديو النهائي.</p>
       <p>في هذه المجلة، نستعرض مجموعة من أبرز هذه الأدوات، مع توضيح كيفية استخدامها بشكل عملي لإنتاج محتوى احترافي بكفاءة وسرعة.</p>
-    </div>
-    <div class="fi grid grid-cols-2 sm:grid-cols-4 gap-3 mt-8">
-      <div class="card text-center"><div style="font-size:1.6rem;font-weight:800;color:var(--indigo-lt)">85%</div><div class="muted" style="font-size:11px;margin-top:4px">تحرير أسرع</div></div>
-      <div class="card text-center"><div style="font-size:1.6rem;font-weight:800;color:var(--indigo-lt)">10x</div><div class="muted" style="font-size:11px;margin-top:4px">زيادة الإنتاج</div></div>
-      <div class="card text-center"><div style="font-size:0.9rem;font-weight:700;color:var(--indigo-lt)">خطط مجانية</div><div class="muted" style="font-size:11px;margin-top:4px">متاحة لجميع الأدوات</div></div>
-      <div class="card text-center"><div style="font-size:1.6rem;font-weight:800;color:var(--indigo-lt)">5</div><div class="muted" style="font-size:11px;margin-top:4px">أدوات مغطاة</div></div>
     </div>
   </div>
 </section>
@@ -398,7 +392,7 @@ h2.ttitle{font-size:clamp(1.5rem,3.8vw,2.5rem);font-weight:800;line-height:1.18;
     <div class="label mb-3">الخاتمة</div>
     <h2 class="stitle mb-5">نحو مستقبل مدعوم بالذكاء الاصطناعي</h2>
     <p class="body-text" style="margin:0 auto 32px;text-align:center">لا تهدف أدوات الذكاء الاصطناعي إلى استبدال المبدعين، بل إلى دعمهم وتعزيز قدراتهم من خلال أتمتة المهام وتوسيع الإمكانيات الإبداعية.</p>
-    <button class="btn btn-p" onclick="scrollTo('sec-cover')">
+    <button class="btn btn-p" onclick="document.getElementById('sec-cover').scrollIntoView({behavior:'smooth'})">
       <i data-lucide="arrow-up" style="width:15px;height:15px"></i> العودة للأعلى
     </button>
     <div class="muted" style="font-size:11px;margin-top:40px;font-family:'Space Mono',monospace">© 2026 المشهد الذكي — مشروع تخرج جامعي</div>
@@ -631,7 +625,7 @@ function cmpBlock(color, feats, best, avail){
 ════════════════════════════════════════════════════ */
 function renderTOC(){
   document.getElementById('tocGrid').innerHTML = tocItems.map(item=>`
-    <div class="toc-card" onclick="scrollTo('${item.target}')">
+    <div class="toc-card" onclick="document.getElementById('${item.target}').scrollIntoView({behavior:'smooth'})">
       <span style="font-size:10px;font-family:'Space Mono',monospace;color:var(--indigo-lt);flex-shrink:0">${item.n}</span>
       <i data-lucide="${item.icon}" style="width:14px;height:14px;color:var(--indigo-lt);flex-shrink:0"></i>
       <span style="font-size:13px;font-weight:600;color:var(--text)">${item.label}</span>
@@ -790,7 +784,7 @@ function checkQuiz(qi,ai,btn){
 /* ════════════════════════════════════════════════════
    SIDE NAV
 ════════════════════════════════════════════════════ */
-const allPages = ['cover','editorial','toc','intro','toolsintro','runway','kling','pictory','descript','elevenlabs','tutorial1','tutorial2','tutorial3','quiz','resources','conclusion'];
+const allPages = ['cover','editorial','stats','toc','intro','toolsintro','runway','kling','pictory','descript','elevenlabs','tutorial1','tutorial2','tutorial3','quiz','resources','conclusion'];
 function renderNav(){
   document.getElementById('sidenav').innerHTML = allPages.map(p=>`
     <div class="dot" data-page="${p}" title="${p}" onclick="scrollTo('sec-${p}')"></div>
