@@ -410,6 +410,16 @@ const tools = [
     useCaseTitle:'تحويل خبر إلى فيديو',
     useCaseText:'يقوم الصحفي بإدخال مقال إخباري، فتقوم الأداة بتحويله إلى فيديو يحتوي على لقطات مناسبة ونصوص على الشاشة خلال دقائق.',
     availability:'يوفر خطة مجانية بميزات محدودة مع خيارات مدفوعة للتوسّع',
+    customDemo:`<div style="margin-top:14px">
+      <p class="label" style="font-size:9px;margin-bottom:8px;text-align:center">مثال توضيحي — مخرجات Pictory AI</p>
+      <div style="display:flex;justify-content:center">
+        <div class="card" style="padding:10px;border-color:rgba(129,140,248,0.3);width:180px;flex-shrink:0">
+          <video controls style="border-radius:8px;width:100%;aspect-ratio:9/16;background:#000;display:block">
+            <source src="pictory-demo.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>`,
     link:'https://pictory.ai', videoUrl:'https://www.youtube.com/watch?v=hVORgS4AVUs&t=42s'
   },
   {
@@ -422,6 +432,53 @@ const tools = [
     useCaseTitle:'تنظيف تسجيل محاضرة',
     useCaseText:'يقوم أستاذ جامعي بتسجيل محاضرة مدتها 60 دقيقة، ثم يرفعها على Descript، حيث يتعرف الذكاء الاصطناعي على النص ويحدد كلمات التكرار والتوقفات غير الضرورية، ليتم حذفها بسهولة. النتيجة: فيديو محرر وجاهز للنشر خلال دقائق.',
     availability:'يوفر خطة مجانية بميزات محدودة مع خيارات مدفوعة للتوسّع',
+    customDemo:`<div style="margin-top:14px">
+      <p class="label" style="font-size:9px;margin-bottom:10px;text-align:center">تجربة تحرير الفيديو باستخدام Descript</p>
+
+      <!-- BEFORE + AFTER VIDEOS side by side -->
+      <div style="display:flex;gap:12px;justify-content:center;margin-bottom:10px">
+        <!-- Before video -->
+        <div style="flex:0 0 auto;width:160px">
+          <div class="card" style="padding:10px;border-color:rgba(109,107,255,0.3);margin-bottom:6px">
+            <video controls style="border-radius:6px;width:100%;aspect-ratio:9/16;background:#000;display:block">
+              <source src="descript-before.mp4" type="video/mp4">
+            </video>
+          </div>
+          <p style="font-size:10px;font-weight:700;color:#818cf8;text-transform:uppercase;letter-spacing:.1em;text-align:center;margin:0">قبل التعديل</p>
+        </div>
+        <!-- Arrow -->
+        <div style="display:flex;align-items:center;flex-shrink:0">
+          <i data-lucide="arrow-left" style="width:18px;height:18px;color:#6366f1"></i>
+        </div>
+        <!-- After video -->
+        <div style="flex:0 0 auto;width:160px">
+          <div class="card" style="padding:10px;border-color:rgba(34,197,94,0.3);background:rgba(34,197,94,0.04);margin-bottom:6px">
+            <video controls style="border-radius:6px;width:100%;aspect-ratio:9/16;background:#000;display:block">
+              <source src="descript-after.mp4" type="video/mp4">
+            </video>
+          </div>
+          <p style="font-size:10px;font-weight:700;color:#4ade80;text-transform:uppercase;letter-spacing:.1em;text-align:center;margin:0">بعد التعديل</p>
+        </div>
+      </div>
+
+      <!-- DELETED TEXT -->
+      <div class="card" style="padding:12px 14px;margin-bottom:8px;background:rgba(239,68,68,0.06);border-color:rgba(239,68,68,0.3)">
+        <p style="font-size:10px;font-weight:700;color:#f87171;text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px">النص المحذوف</p>
+        <p style="font-family:'Space Mono',monospace;font-size:12px;line-height:1.8;margin:0;direction:ltr;text-align:left">
+          <span style="background:rgba(239,68,68,0.18);color:#fca5a5;text-decoration:line-through;text-decoration-color:#ef4444;padding:2px 4px;border-radius:3px">it can be kind of annoying because when you edit on a timeline,</span>
+        </p>
+      </div>
+
+      <!-- RESULT NOTE -->
+      <div class="card" style="padding:12px 14px;background:rgba(34,197,94,0.06);border-color:rgba(34,197,94,0.3)">
+        <div style="display:flex;align-items:center;gap:10px">
+          <div style="width:32px;height:32px;border-radius:8px;background:rgba(34,197,94,0.12);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+            <i data-lucide="scissors" style="width:15px;height:15px;color:#4ade80"></i>
+          </div>
+          <p style="font-size:12px;color:#86efac;margin:0;line-height:1.75">حذف الجملة من النص أدى إلى حذف المقطع الصوتي المقابل من الفيديو تلقائياً — دون لمس المخطط الزمني.</p>
+        </div>
+      </div>
+    </div>`,
     link:'https://www.descript.com', videoUrl:'https://www.youtube.com/watch?v=i2A7OO0e5zw'
   },
   {
