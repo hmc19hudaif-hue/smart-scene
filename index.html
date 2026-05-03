@@ -187,7 +187,7 @@ h2.ttitle{font-size:clamp(1.5rem,3.8vw,2.5rem);font-weight:800;line-height:1.18;
     <div class="fi mb-8">
       <div class="label mb-2">إحصائيات</div>
       <h2 class="stitle">الأرقام تتحدث</h2>
-      <p class="muted" style="font-size:13px;margin-top:4px">تعكس هذه الأرقام التأثير الكبير الذي أحدثته أدوات الذكاء الاصطناعي في تسريع وتحسين عملية إنتاج الفيديو.</p>
+      <p class="muted" style="font-size:13px;margin-top:4px">تعتمد هذه الأرقام على تقديرات عامة وتقارير من مواقع أدوات الذكاء الاصطناعي ودراسات حول تأثير التقنية على الإنتاجية.</p>
     </div>
     <div class="fi" style="max-width:520px">
       <!-- 85% -->
@@ -760,6 +760,51 @@ function renderResources(){
       <a href="${r.url}" target="_blank" class="rlink">${r.display}</a>
     </div>
   `).join('');
+
+  // Inject academic sources after grid
+  const section = document.getElementById('sec-resources');
+  const existing = section.querySelector('#academicSources');
+  if(existing) existing.remove();
+
+  const academic = document.createElement('div');
+  academic.id = 'academicSources';
+  academic.innerHTML = `
+    <!-- McKinsey reports -->
+    <div class="card fi mt-4" style="background:rgba(99,102,241,0.06);border-color:rgba(99,102,241,0.2)">
+      <h3 style="color:var(--text);font-size:14px;font-weight:600;margin-bottom:12px;display:flex;align-items:center;gap:8px">
+        <i data-lucide="bar-chart-2" style="width:15px;height:15px;color:var(--indigo)"></i> تقارير عن تأثير الذكاء الاصطناعي
+      </h3>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div style="padding-bottom:12px;border-bottom:1px solid rgba(99,102,241,0.1)">
+          <p style="color:var(--text-sec);font-size:13px;font-weight:600;margin:0 0 3px">McKinsey &amp; Company. (2023).</p>
+          <p style="color:var(--text-muted);font-size:12px;font-style:italic;margin:0 0 4px;line-height:1.6">The economic potential of generative AI: The next productivity frontier.</p>
+          <a href="https://www.mckinsey.com" target="_blank" class="rlink">mckinsey.com</a>
+        </div>
+        <div>
+          <p style="color:var(--text-sec);font-size:13px;font-weight:600;margin:0 0 3px">McKinsey &amp; Company. (2023).</p>
+          <p style="color:var(--text-muted);font-size:12px;font-style:italic;margin:0 0 4px;line-height:1.6">What AI could mean for film and TV production and the industry's future.</p>
+          <a href="https://www.mckinsey.com" target="_blank" class="rlink">mckinsey.com</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Academic studies -->
+    <div class="card fi mt-3" style="background:rgba(99,102,241,0.06);border-color:rgba(99,102,241,0.2)">
+      <h3 style="color:var(--text);font-size:14px;font-weight:600;margin-bottom:12px;display:flex;align-items:center;gap:8px">
+        <i data-lucide="graduation-cap" style="width:15px;height:15px;color:var(--indigo)"></i> دراسات أكاديمية
+      </h3>
+      <div>
+        <p style="color:var(--text-sec);font-size:13px;font-weight:600;margin:0 0 3px">arXiv. (2025).</p>
+        <p style="color:var(--text-muted);font-size:12px;font-style:italic;margin:0 0 4px;line-height:1.6">Artificial intelligence in video production.</p>
+        <a href="https://arxiv.org" target="_blank" class="rlink">arxiv.org</a>
+      </div>
+    </div>
+  `;
+
+  // Insert before the tips card
+  const tipsCard = section.querySelector('.wrap > .card.fi');
+  section.querySelector('.wrap').insertBefore(academic, tipsCard);
+  lucide.createIcons();
 }
 
 /* ════════════════════════════════════════════════════
